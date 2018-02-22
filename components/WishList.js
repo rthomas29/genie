@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
 export default class WishList extends Component {
@@ -50,19 +50,30 @@ export default class WishList extends Component {
             }}
             title="Create new wish"
           />
-          <Modal isVisible={this.state.modalVisible} avoidKeyboard={true}>
+          <Modal isVisible={this.state.modalVisible} avoidKeyboard={true} swipeDirection="down" style={styles.modal}>
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
-                <TextInput
-                  style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+                <FormLabel>Wish Name</FormLabel>
+                <FormInput
+                  style={{ height: 10, borderColor: 'gray', borderWidth: 1 }}
                   onChangeText={text => this.setState({ giftName: text })}
                   editable={true}
                   height={60}
                   value={this.state.giftName}
                   autoFocus={true}
-                  placeholder="Enter gift name"
                 />
-                <Button onPress={this.toggleModal} title="Close modal" />
+                <Button
+                  onPress={this.toggleModal}
+                  title="Add new wish"
+                  buttonStyle={{
+                    backgroundColor: '#fff',
+                    borderColor: '#19B5FE',
+                    borderRadius: 5,
+                  }}
+                  textStyle={{
+                    color: '#000',
+                  }}
+                />
               </View>
             </View>
           </Modal>
@@ -79,10 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'grey',
+  modal: {
+    backgroundColor: '#ECF0F1',
   },
-  innerContainer: {},
 });
