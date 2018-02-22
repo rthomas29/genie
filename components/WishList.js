@@ -33,6 +33,9 @@ export default class WishList extends Component {
   static navigationOptions = {
     title: 'Wish List',
   };
+  sendToImage = () => {
+    alert('goingto image');
+  };
   render() {
     if (this.state.wishLength === 0) {
       return (
@@ -63,8 +66,8 @@ export default class WishList extends Component {
                   autoFocus={true}
                 />
                 <Button
-                  onPress={this.toggleModal}
-                  title="Add new wish"
+                  onPress={this.sendToImage}
+                  title="Next"
                   buttonStyle={{
                     backgroundColor: '#fff',
                     borderColor: '#19B5FE',
