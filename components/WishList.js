@@ -41,11 +41,10 @@ export default class WishList extends Component {
           <Text h4>You don't have any wishes.</Text>
           <Button
             onPress={this.toggleModal}
-            icon={<Icon name="plus" size={15} color="red" />}
-            iconLeft
             buttonStyle={{
               borderColor: '#19B5FE',
               backgroundColor: '#fff',
+              borderRadius: 5,
             }}
             textStyle={{
               color: '#000',

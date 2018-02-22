@@ -19,7 +19,7 @@ class Home extends React.Component {
           buttonStyle={{
             backgroundColor: '#fff',
             borderColor: '#19B5FE',
-            borderRadius: '5px',
+            borderRadius: 5,
           }}
           textStyle={{
             color: '#000',
