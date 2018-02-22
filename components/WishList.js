@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Text, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal';
 
 export default class WishList extends Component {
@@ -40,6 +41,8 @@ export default class WishList extends Component {
           <Text h4>You don't have any wishes.</Text>
           <Button
             onPress={this.toggleModal}
+            icon={<Icon name="plus" size={15} color="red" />}
+            iconLeft
             buttonStyle={{
               borderColor: '#19B5FE',
               backgroundColor: '#fff',
@@ -47,7 +50,7 @@ export default class WishList extends Component {
             textStyle={{
               color: '#000',
             }}
-            title="Add Wish"
+            title="Create new wish"
           />
           <Modal visible={this.state.modalVisible} animationType="slide">
             <View style={styles.modalContainer}>
