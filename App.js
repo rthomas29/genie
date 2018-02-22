@@ -15,7 +15,7 @@ class Home extends React.Component {
         <Landing />
         <Button
           onPress={() => this.props.navigation.navigate('WishList')}
-          title="See Wishlist"
+          title="See Wishes"
           buttonStyle={{
             backgroundColor: '#fff',
             borderColor: '#19B5FE',
