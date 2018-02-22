@@ -42,7 +42,6 @@ export default class WishList extends Component {
   };
   render() {
     const { params } = this.props.navigation.state;
-    const id = params ? params.id : null;
     const navigation = params ? params.navigation : null;
 
     if (this.state.wishLength === 0) {

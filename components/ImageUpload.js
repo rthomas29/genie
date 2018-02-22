@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
+import { ImagePicker } from 'expo';
 
 export default class ImageUpload extends Component {
+  constructor() {
+    super();
+    this.state = {
+      image: null,
+    };
+    this.pickImage = this.pickImage.bind(this);
+  }
+  pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
   render() {
+    let { image } = this.state;
     return (
       <View>
         <Button
-          onPress={this.getImage}
+          onPress={this.pickImage}
           title="Upload Wish Image"
           buttonStyle={{
             backgroundColor: '#fff',
@@ -18,6 +39,7 @@ export default class ImageUpload extends Component {
             color: '#000',
           }}
         />
+        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       </View>
     );
   }
