@@ -17,7 +17,12 @@ class Home extends React.Component {
           onPress={() => this.props.navigation.navigate('WishList')}
           title="See Wishlist"
           buttonStyle={{
-            backgroundColor: '#19B5FE',
+            backgroundColor: '#fff',
+            borderColor: '#19B5FE',
+            borderRadius: '5px',
+          }}
+          textStyle={{
+            color: '#000',
           }}
         />
       </View>
@@ -28,7 +33,7 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
     justifyContent: 'center',
   },
