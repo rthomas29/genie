@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
 export default class WishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      giftLength: 0,
+      wishLength: 0,
       modalVisible: false,
       giftName: '',
       imgUrl: '',
@@ -30,13 +31,24 @@ export default class WishList extends Component {
     });
   }
   static navigationOptions = {
-    title: 'Your WishLists',
+    title: 'Wish List',
   };
   render() {
-    if (this.state.giftLength === 0) {
+    if (this.state.wishLength === 0) {
       return (
-        <View>
-          <Text>You haven't added any gifts to your list!</Text>
+        <View style={styles.container}>
+          <Text h4>You don't have any wishes.</Text>
+          <Button
+            onPress={this.toggleModal}
+            buttonStyle={{
+              borderColor: '#19B5FE',
+              backgroundColor: '#fff',
+            }}
+            textStyle={{
+              color: '#000',
+            }}
+            title="Add Wish"
+          />
           <Modal visible={this.state.modalVisible} animationType="slide">
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
@@ -53,9 +65,6 @@ export default class WishList extends Component {
               </View>
             </View>
           </Modal>
-          <TouchableOpacity onPress={this.toggleModal}>
-            <Text>Add gift</Text>
-          </TouchableOpacity>
         </View>
       );
     }
@@ -66,6 +75,8 @@ export default class WishList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContainer: {
     flex: 1,
