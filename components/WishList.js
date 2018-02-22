@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
+import MainStack from '../App';
 import Modal from 'react-native-modal';
+import ImageUpload from './ImageUpload';
+import { withNavigation } from 'react-navigation';
 
 export default class WishList extends Component {
   constructor(props) {
@@ -33,10 +36,15 @@ export default class WishList extends Component {
   static navigationOptions = {
     title: 'Wish List',
   };
-  sendToImage = () => {
-    alert('goingto image');
+  goToImageUpload = nav => {
+    this.setState({ modalVisible: false });
+    nav('ImageUpload');
   };
   render() {
+    const { params } = this.props.navigation.state;
+    const id = params ? params.id : null;
+    const navigation = params ? params.navigation : null;
+
     if (this.state.wishLength === 0) {
       return (
         <View style={styles.container}>
@@ -66,7 +74,7 @@ export default class WishList extends Component {
                   autoFocus={true}
                 />
                 <Button
-                  onPress={this.sendToImage}
+                  onPress={() => this.goToImageUpload(navigation)}
                   title="Next"
                   buttonStyle={{
                     backgroundColor: '#fff',

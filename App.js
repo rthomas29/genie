@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Landing from './components/Landing';
 import WishList from './components/WishList';
+import ImageUpload from './components/ImageUpload';
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -14,7 +15,9 @@ class Home extends React.Component {
       <View style={styles.container}>
         <Landing />
         <Button
-          onPress={() => this.props.navigation.navigate('WishList')}
+          onPress={() =>
+            this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate, id: 1 })
+          }
           title="See Wishes"
           buttonStyle={{
             backgroundColor: '#fff',
@@ -39,12 +42,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainStack = StackNavigator({
+export const MainStack = StackNavigator({
   Landing: {
     screen: Home,
   },
   WishList: {
     screen: WishList,
+  },
+  ImageUpload: {
+    screen: ImageUpload,
   },
 });
 
