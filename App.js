@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { Button } from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Landing from './components/Landing';
 import WishList from './components/WishList';
@@ -12,9 +13,13 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Landing />
-        <Button onPress={() => Alert.alert("We're working")} title="Sign Up" />
-        <Button onPress={() => Alert.alert("We're working")} title="Log In" />
-        <Button onPress={() => this.props.navigation.navigate('WishList')} title="See WishList" />
+        <Button
+          onPress={() => this.props.navigation.navigate('WishList')}
+          title="See Wishlist"
+          buttonStyle={{
+            backgroundColor: '#19B5FE',
+          }}
+        />
       </View>
     );
   }
