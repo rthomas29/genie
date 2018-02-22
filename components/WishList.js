@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Text, Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal';
 
 export default class WishList extends Component {
@@ -51,7 +50,7 @@ export default class WishList extends Component {
             }}
             title="Create new wish"
           />
-          <Modal visible={this.state.modalVisible} animationType="slide">
+          <Modal isVisible={this.state.modalVisible} avoidKeyboard={true}>
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
                 <TextInput
