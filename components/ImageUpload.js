@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Alert } from 'react-native';
+import { Text, View, Alert, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 
@@ -16,9 +16,6 @@ export default class ImageUpload extends Component {
       allowsEditing: true,
       aspect: [4, 3],
     });
-
-    console.log(result);
-
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
