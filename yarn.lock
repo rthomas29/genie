@@ -1975,10 +1975,6 @@ detect-newline@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
 
-dialog-polyfill@^0.4.7:
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/dialog-polyfill/-/dialog-polyfill-0.4.9.tgz#c690b3727c3d82e0f947bd5b910b32af8a2ef57d"
-
 diff@^3.2.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
@@ -2477,7 +2473,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-firebase@^4.10.1, firebase@^4.3.1:
+firebase@^4.10.1:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.10.1.tgz#68724a6f680ca5759bd870dcb18b5f6e09a176b1"
   dependencies:
@@ -2490,13 +2486,6 @@ firebase@^4.10.1, firebase@^4.3.1:
     "@firebase/storage" "0.1.8"
     dom-storage "^2.0.2"
     xmlhttprequest "^1.8.0"
-
-firebaseui@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-2.6.1.tgz#f072092422b5d4cd064c55f0baae114dd32d7c21"
-  dependencies:
-    dialog-polyfill "^0.4.7"
-    firebase "^4.3.1"
 
 first-chunk-stream@^1.0.0:
   version "1.0.0"
