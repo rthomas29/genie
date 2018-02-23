@@ -3,24 +3,43 @@ import { View } from 'react-native';
 import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
 
 export default class NameForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    };
+    this.handleInput = this.handleInput.bind(this);
+  }
+  handleInput = text => {
+    this.setState({ input: text });
+  };
+  goToImageUpload = nav => {
+    nav('ImageUpload', { getImageUrl: this.getImageUrl });
+    this.setState({ wishLength: this.state.wishLength + 1 });
+  };
+  sendGiftNameToWishList = (setImageValFunc, currentInputVal, nav) => {
+    setImageValFunc(currentInputVal);
+    this.goToImageUpload(nav);
+  };
   render() {
     const { params } = this.props.navigation.state;
     const giftName = params ? params.giftName : null;
     const navigation = params ? params.navigation : null;
+    const getImageUrl = params ? params.getImageUrl : null;
 
     return (
       <View>
         <FormLabel>Wish Name</FormLabel>
         <FormInput
           style={{ height: 10, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={text => this.setState({ giftName: text })}
+          onChangeText={text => this.handleInput(text)}
           editable={true}
           height={60}
-          value={giftName}
+          value={this.state.input}
           autoFocus={true}
         />
         <Button
-          onPress={() => navigation('ImageUpload')}
+          onPress={() => this.sendGiftNameToWishList(getImageUrl, this.state.input, navigation)}
           title="Next"
           buttonStyle={{
             backgroundColor: '#fff',

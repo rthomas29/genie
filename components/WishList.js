@@ -54,7 +54,9 @@ export default class WishList extends Component {
         <View style={styles.container}>
           <Text h4>You don't have any wishes.</Text>
           <Button
-            onPress={() => navigation('NameForm', { giftName: this.state.giftName, navigation })}
+            onPress={() =>
+              navigation('NameForm', { giftName: this.state.giftName, navigation, getImageUrl: this.getImageUrl })
+            }
             buttonStyle={{
               borderColor: '#19B5FE',
               backgroundColor: '#fff',
