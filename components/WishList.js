@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Image } from 'react-native';
-import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
+import { Text, Button, FormLabel, FormInput, SocialIcon } from 'react-native-elements';
 import MainStack from '../App';
 import Modal from 'react-native-modal';
 import ImageUpload from './ImageUpload';
@@ -85,8 +85,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  modal: {
-    backgroundColor: '#ECF0F1',
   },
 });

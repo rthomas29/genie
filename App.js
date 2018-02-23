@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native-elements';
+import { Button, SocialIcon } from 'react-native-elements';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Landing from './components/Landing';
@@ -15,17 +15,29 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Landing />
-        <Button
+        <SocialIcon
+          style={styles.social}
+          title="Sign In With Facebook"
+          light={true}
+          button
+          type="facebook"
           onPress={() => this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate })}
-          title="See Wishes"
-          buttonStyle={{
-            backgroundColor: '#fff',
-            borderColor: '#19B5FE',
-            borderRadius: 5,
-          }}
-          textStyle={{
-            color: '#000',
-          }}
+        />
+        <SocialIcon
+          style={styles.social}
+          title="Sign In With Twitter"
+          light={true}
+          button
+          type="twitter"
+          onPress={() => this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate })}
+        />
+        <SocialIcon
+          style={styles.social}
+          title="Sign In With Google"
+          light={true}
+          button
+          type="google-plus-official"
+          onPress={() => this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate })}
         />
       </View>
     );
@@ -38,6 +50,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  social: {
+    padding: 10,
   },
 });
 
