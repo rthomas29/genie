@@ -64,7 +64,14 @@ export default class WishList extends Component {
             }}
             title="Create new wish"
           />
-          <Modal isVisible={this.state.modalVisible} avoidKeyboard={true} swipeDirection="down" style={styles.modal}>
+          <Modal
+            isVisible={this.state.modalVisible}
+            animationIn="slideInRight"
+            animationOut="slideOutLeft"
+            avoidKeyboard={true}
+            swipeDirection="down"
+            style={styles.modal}
+          >
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
                 <FormLabel>Wish Name</FormLabel>
@@ -98,18 +105,6 @@ export default class WishList extends Component {
         <View>
           <Text>Name: {this.state.giftName}</Text>
           <Image source={{ uri: this.state.imgUrl }} style={{ width: 40, height: 40 }} />
-          <Button
-            onPress={this.toggleModal}
-            buttonStyle={{
-              borderColor: '#19B5FE',
-              backgroundColor: '#fff',
-              borderRadius: 5,
-            }}
-            textStyle={{
-              color: '#000',
-            }}
-            title="Create new wish"
-          />
         </View>
       );
     }
