@@ -18,6 +18,7 @@ export default class WishList extends Component {
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.getImageUrl = this.getImageUrl.bind(this);
   }
 
   toggleModal() {
@@ -33,12 +34,15 @@ export default class WishList extends Component {
       imgUrl: '',
     });
   }
+  getImageUrl(url) {
+    this.setState({ imgUrl: url });
+  }
   static navigationOptions = {
     title: 'Wish List',
   };
   goToImageUpload = nav => {
+    nav('ImageUpload', { getImageUrl: this.getImageUrl });
     this.setState({ modalVisible: false });
-    nav('ImageUpload');
   };
   render() {
     const { params } = this.props.navigation.state;
@@ -47,6 +51,9 @@ export default class WishList extends Component {
     if (this.state.wishLength === 0) {
       return (
         <View style={styles.container}>
+          <Text>
+            {this.state.giftName} and {this.state.imgUrl}
+          </Text>
           <Text h4>You don't have any wishes.</Text>
           <Button
             onPress={this.toggleModal}

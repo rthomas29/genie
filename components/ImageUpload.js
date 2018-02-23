@@ -18,8 +18,13 @@ export default class ImageUpload extends Component {
     });
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+      this.getImageUrl(this.state.image);
     }
   };
+  componentDidMount() {
+    const { params } = this.props.navigation.state;
+    this.getImageUrl = params ? params.getImageUrl : null;
+  }
   render() {
     let { image } = this.state;
     return (
