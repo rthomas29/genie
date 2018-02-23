@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase'
 import { Button, SocialIcon } from 'react-native-elements';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
