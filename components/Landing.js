@@ -6,7 +6,7 @@ export default class Landing extends Component {
   render() {
     return (
       <View>
-        <Text h2>Genee</Text>
+        <Text h2>genie</Text>
       </View>
     );
   }
