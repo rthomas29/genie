@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Landing from './components/Landing';
 import WishList from './components/WishList';
+import NameForm from './components/NameForm';
 import ImageUpload from './components/ImageUpload';
 
 class Home extends React.Component {
@@ -49,6 +50,9 @@ export const MainStack = StackNavigator({
   },
   ImageUpload: {
     screen: ImageUpload,
+  },
+  NameForm: {
+    screen: NameForm,
   },
 });
 

@@ -4,6 +4,7 @@ import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
 import MainStack from '../App';
 import Modal from 'react-native-modal';
 import ImageUpload from './ImageUpload';
+import NameForm from './NameForm';
 import { withNavigation } from 'react-navigation';
 
 export default class WishList extends Component {
@@ -53,7 +54,7 @@ export default class WishList extends Component {
         <View style={styles.container}>
           <Text h4>You don't have any wishes.</Text>
           <Button
-            onPress={this.toggleModal}
+            onPress={() => navigation('NameForm', { giftName: this.state.giftName, navigation })}
             buttonStyle={{
               borderColor: '#19B5FE',
               backgroundColor: '#fff',
@@ -64,40 +65,6 @@ export default class WishList extends Component {
             }}
             title="Create new wish"
           />
-          <Modal
-            isVisible={this.state.modalVisible}
-            animationIn="slideInRight"
-            animationOut="slideOutLeft"
-            avoidKeyboard={true}
-            swipeDirection="down"
-            style={styles.modal}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.innerContainer}>
-                <FormLabel>Wish Name</FormLabel>
-                <FormInput
-                  style={{ height: 10, borderColor: 'gray', borderWidth: 1 }}
-                  onChangeText={text => this.setState({ giftName: text })}
-                  editable={true}
-                  height={60}
-                  value={this.state.giftName}
-                  autoFocus={true}
-                />
-                <Button
-                  onPress={() => this.goToImageUpload(navigation)}
-                  title="Next"
-                  buttonStyle={{
-                    backgroundColor: '#fff',
-                    borderColor: '#19B5FE',
-                    borderRadius: 5,
-                  }}
-                  textStyle={{
-                    color: '#000',
-                  }}
-                />
-              </View>
-            </View>
-          </Modal>
         </View>
       );
     } else {
