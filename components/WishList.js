@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, Image } from 'react-native';
 import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
 import MainStack from '../App';
 import Modal from 'react-native-modal';
@@ -42,7 +42,7 @@ export default class WishList extends Component {
   };
   goToImageUpload = nav => {
     nav('ImageUpload', { getImageUrl: this.getImageUrl });
-    this.setState({ modalVisible: false });
+    this.setState({ modalVisible: false, wishLength: this.state.wishLength + 1 });
   };
   render() {
     const { params } = this.props.navigation.state;
@@ -51,9 +51,6 @@ export default class WishList extends Component {
     if (this.state.wishLength === 0) {
       return (
         <View style={styles.container}>
-          <Text>
-            {this.state.giftName} and {this.state.imgUrl}
-          </Text>
           <Text h4>You don't have any wishes.</Text>
           <Button
             onPress={this.toggleModal}
@@ -96,8 +93,26 @@ export default class WishList extends Component {
           </Modal>
         </View>
       );
+    } else {
+      return (
+        <View>
+          <Text>Name: {this.state.giftName}</Text>
+          <Image source={{ uri: this.state.imgUrl }} style={{ width: 40, height: 40 }} />
+          <Button
+            onPress={this.toggleModal}
+            buttonStyle={{
+              borderColor: '#19B5FE',
+              backgroundColor: '#fff',
+              borderRadius: 5,
+            }}
+            textStyle={{
+              color: '#000',
+            }}
+            title="Create new wish"
+          />
+        </View>
+      );
     }
-    return <Text>WishList</Text>;
   }
 }
 
