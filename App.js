@@ -22,11 +22,11 @@ class Home extends React.Component {
           title="Login"
           onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
         />
-        <Button
+        {/* <Button
           raised
           title="Sign Up"
           onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
-        />
+        /> */}
       </View>
     );
   }
