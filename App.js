@@ -19,8 +19,12 @@ class Home extends React.Component {
         <Text h2>genie</Text>
         <Button
           raised
-          icon={{ name: 'cached' }}
           title="Login"
+          onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
+        />
+        <Button
+          raised
+          title="Sign Up"
           onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
         />
       </View>
