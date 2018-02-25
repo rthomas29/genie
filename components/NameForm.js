@@ -14,7 +14,7 @@ export default class NameForm extends Component {
     this.setState({ input: text });
   };
   goToImageUpload = nav => {
-    nav('ImageUpload', { getImageUrl: this.getImageUrl });
+    nav.navigate('ImageUpload', { getImageUrl: this.getImageUrl });
     this.setState({ wishLength: this.state.wishLength + 1 });
   };
   sendGiftNameToWishList = (setImageValFunc, currentInputVal, nav) => {
