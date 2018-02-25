@@ -6,6 +6,7 @@ import Modal from 'react-native-modal';
 import ImageUpload from './ImageUpload';
 import NameForm from './NameForm';
 import { withNavigation } from 'react-navigation';
+import * as firebase from 'firebase';
 
 export default class WishList extends Component {
   constructor(props) {
@@ -43,9 +44,13 @@ export default class WishList extends Component {
     this.setState({ modalVisible: false, wishLength: this.state.wishLength + 1 });
   };
   async logout(nav) {
-    await firebase.auth().signOut();
-    console.log('Logged Out');
-    nav.navigate('Landing');
+    try {
+      await firebase.auth().signOut();
+      console.log('Logged Out');
+      nav.navigate('Landing');
+    } catch (error) {
+      console.log(error);
+    }
   }
   render() {
     const { params } = this.props.navigation.state;
@@ -58,7 +63,7 @@ export default class WishList extends Component {
           <Header
             leftComponent={{ icon: 'menu', color: '#fff' }}
             centerComponent={{ text: 'Genie', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'highlight-off', color: '#fff', onPress: () => alert('pressed') }}
+            rightComponent={{ icon: 'highlight-off', color: '#fff', onPress: () => this.logout(this.props.navigation) }}
           />
           <View style={styles.container}>
             <Text>Welcome, {user.email}</Text>
