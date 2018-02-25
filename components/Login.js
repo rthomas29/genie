@@ -6,8 +6,8 @@ import * as firebase from 'firebase';
 import { styles } from '../App';
 
 export default class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -18,9 +18,10 @@ export default class Login extends Component {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
 
       console.log('Account created');
-
+      this.props.navigation.navigate('WishList');
       // Navigate to the Home page, the user is auto logged in
     } catch (error) {
+      alert('Email or password is invalid');
       console.log(error.toString());
     }
   }

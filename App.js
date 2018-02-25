@@ -21,7 +21,7 @@ class Home extends React.Component {
           raised
           icon={{ name: 'cached' }}
           title="Login"
-          onPress={() => this.props.navigation.navigate('Login')}
+          onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
         />
       </View>
     );
