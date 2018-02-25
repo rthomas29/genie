@@ -33,7 +33,7 @@ export default class Login extends Component {
       const user = firebase.auth().currentUser;
       this.setState({ user });
       console.log(user);
-      this.props.navigation.navigate('WishList', { user: this.state.user });
+      this.props.navigation.navigate('WishList', { user: this.state.user, navigation: this.props.navigation });
     } catch (error) {
       alert('Invalid user');
       console.log(error.toString());

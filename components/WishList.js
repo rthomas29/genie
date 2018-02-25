@@ -70,7 +70,11 @@ export default class WishList extends Component {
             <Text h4>You don't have any wishes.</Text>
             <Button
               onPress={() =>
-                navigation('NameForm', { giftName: this.state.giftName, navigation, getImageUrl: this.getImageUrl })
+                navigation.navigate('NameForm', {
+                  giftName: this.state.giftName,
+                  navigation,
+                  getImageUrl: this.getImageUrl,
+                })
               }
               buttonStyle={{
                 borderColor: '#19B5FE',
