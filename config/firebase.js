@@ -18,6 +18,4 @@ var config = {
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
 
-firebase.initializeApp(config);
-
-export default firebase;
+export default config;
