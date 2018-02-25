@@ -1,3 +1,6 @@
+import * as firebase from 'firebase';
+import config from './firebase';
+
 export const FIREBASE_API_KEY = 'AIzaSyA8SeHANwbbtHwX3A4clYgkz3bMElUtYas';
 export const FIREBASE_AUTH_DOMAIN = 'genee-19f80.firebaseapp.com';
 export const FIREBASE_DATABASE_URL = 'https://genee-19f80.firebaseio.com';

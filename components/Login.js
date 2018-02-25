@@ -5,6 +5,7 @@ import config from '../config/firebase';
 import * as firebase from 'firebase';
 import { styles } from '../App';
 
+firebase.initializeApp(config);
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,9 @@ export default class Login extends Component {
     }
   }
   componentDidMount() {
-    firebase.initializeApp(config);
+    this.authSubscription = firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user });
+    });
   }
   render() {
     return (
