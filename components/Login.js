@@ -25,30 +25,6 @@ export default class Login extends Component {
       console.log(error.toString());
     }
   }
-  googleSignIn() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-        console.log(user);
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-  }
   componentDidMount() {
     firebase.initializeApp(config);
   }
@@ -60,30 +36,6 @@ export default class Login extends Component {
         <FormLabel>Password</FormLabel>
         <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
         <Button onPress={() => this.signup(this.state.email, this.state.password)} title="Sign Up" />
-        <SocialIcon
-          style={styles.social}
-          title="Google Sign In"
-          light={true}
-          button
-          type="google"
-          onPress={() => this.googleSignIn()}
-        />
-        {/* <SocialIcon
-          style={styles.social}
-          title="Sign In With Twitter"
-          light={true}
-          button
-          type="twitter"
-          onPress={() => this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate })}
-        />
-        <SocialIcon
-          style={styles.social}
-          title="Sign In With Google"
-          light={true}
-          button
-          type="google-plus-official"
-          onPress={() => this.props.navigation.navigate('WishList', { navigation: this.props.navigation.navigate })}
-        />  */}
       </View>
     );
   }
