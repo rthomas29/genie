@@ -48,12 +48,12 @@ export default class WishList extends Component {
   render() {
     const { params } = this.props.navigation.state;
     const navigation = params ? params.navigation : null;
-    const userEmail = params ? params.userEmail : null;
+    const user = params ? params.user : null;
 
     if (this.state.wishLength === 0) {
       return (
         <View style={styles.container}>
-          <Text>Welcome, {userEmail}</Text>
+          <Text>Welcome, {user.email}</Text>
           <Text h4>You don't have any wishes.</Text>
           <Button
             onPress={() =>

@@ -11,7 +11,7 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      userEmail: '',
+      user: {},
     };
   }
   async signup(email, pass) {
@@ -29,16 +29,16 @@ export default class Login extends Component {
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
-      console.log('logged in');
       const user = firebase.auth().currentUser;
-      this.setState({ userEmail: user.email });
+      this.setState({ user });
       console.log(user);
-      this.props.navigation.navigate('WishList', { userEmail: this.state.userEmail });
+      this.props.navigation.navigate('WishList', { user: this.state.user });
     } catch (error) {
       alert('Invalid user');
       console.log(error.toString());
     }
   }
+
   componentDidMount() {
     firebase.initializeApp(config);
   }
