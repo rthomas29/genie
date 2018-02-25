@@ -38,7 +38,6 @@ export default class Login extends Component {
       console.log(error.toString());
     }
   }
-
   componentDidMount() {
     firebase.initializeApp(config);
   }
