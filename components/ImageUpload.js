@@ -22,14 +22,15 @@ export default class ImageUpload extends Component {
       this.getImageUrl(this.state.image);
     }
   };
-  componentDidMount() {
+  componentDidMount() {}
+  render() {
     const { params } = this.props.navigation.state;
     this.getImageUrl = params ? params.getImageUrl : null;
-  }
-  render() {
+    giftName = params ? params.giftName : null;
     let { image } = this.state;
     return (
       <View style={styles.container}>
+        <Text>{giftName}</Text>
         <Button
           onPress={this.pickImage}
           title="Upload Wish Image"

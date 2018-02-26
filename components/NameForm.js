@@ -7,15 +7,15 @@ export default class NameForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
+      giftName: '',
     };
     this.handleInput = this.handleInput.bind(this);
   }
   handleInput = text => {
-    this.setState({ input: text });
+    this.setState({ giftName: text });
   };
   goToImageUpload = nav => {
-    this.props.navigation.navigate('ImageUpload', { getImageUrl: this.getImageUrl });
+    this.props.navigation.navigate('ImageUpload', { getImageUrl: this.getImageUrl, giftName: this.state.giftName });
     this.setState({ wishLength: this.state.wishLength + 1 });
   };
   sendGiftNameToWishList = (setImageValFunc, currentInputVal, nav) => {
@@ -36,11 +36,11 @@ export default class NameForm extends Component {
           onChangeText={text => this.handleInput(text)}
           editable={true}
           height={60}
-          value={this.state.input}
+          value={this.state.giftName}
           autoFocus={true}
         />
         <Button
-          onPress={() => this.sendGiftNameToWishList(getImageUrl, this.state.input, navigation)}
+          onPress={() => this.props.navigation.navigate('ImageUpload', { giftName: this.state.giftName })}
           title="Next"
           buttonStyle={{
             backgroundColor: '#fff',
