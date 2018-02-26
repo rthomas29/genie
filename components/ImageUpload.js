@@ -15,7 +15,7 @@ export default class ImageUpload extends Component {
     this.pickImage = this.pickImage.bind(this);
   }
   addWishToDb = wishName => {
-    const userId = firebase.auth().currentUser.uid;
+    this.user = firebase.auth().currentUser;
     const wish = {
       name: wishName,
       imgUrl: this.state.image,
@@ -23,8 +23,10 @@ export default class ImageUpload extends Component {
 
     firebase
       .database()
-      .ref(`${userId}/wishes`)
+      .ref(`${this.user.uid}/wishes`)
       .push(JSON.stringify(wish));
+
+    this.props.navigation.navigate('WishList', { user: this.user });
   };
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
