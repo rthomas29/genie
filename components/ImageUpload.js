@@ -3,10 +3,12 @@ import { Text, View, Alert, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 import { styles } from '../App';
+import firebase from '../config/firebase';
+import { database } from '../config/firebase';
 
 export default class ImageUpload extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       image: null,
     };
@@ -21,18 +23,28 @@ export default class ImageUpload extends Component {
       this.setState({ image: result.uri });
       this.getImageUrl(this.state.image);
     }
+    this.addWishToDb(giftName);
   };
-  componentDidMount() {}
+  addWishToDb(wishName) {
+    firebase
+      .database()
+      .ref('/wishes')
+      .push(
+        JSON.stringify({
+          wishName: wishName,
+          imgUrl: this.state.image,
+        }),
+      );
+  }
   render() {
     const { params } = this.props.navigation.state;
     this.getImageUrl = params ? params.getImageUrl : null;
-    giftName = params ? params.giftName : null;
+    this.giftName = params ? params.giftName : null;
     let { image } = this.state;
     return (
       <View style={styles.container}>
-        <Text>{giftName}</Text>
         <Button
-          onPress={this.pickImage}
+          onPress={() => this.pickImage()}
           title="Upload Wish Image"
           buttonStyle={{
             backgroundColor: '#fff',
