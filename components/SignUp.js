@@ -4,31 +4,27 @@ import { Button, Text, FormInput, FormLabel, SocialIcon } from 'react-native-ele
 import firebase from '../config/firebase';
 import { styles } from '../App';
 
-export default class Login extends Component {
+export default class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
       user: {},
+      displayName: '',
     };
   }
-  async login(email, pass) {
+  async signup(email, pass) {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, pass);
+      await firebase.auth().createUserWithEmailAndPassword(email, pass);
       const user = firebase.auth().currentUser;
       this.setState({ user });
-      console.log(user);
+      console.log('Account created');
+      this.setState({ email: '', password: '' });
       this.props.navigation.navigate('WishList', { user: this.state.user });
     } catch (error) {
-      alert('Invalid user');
-      console.log(error.toString());
+      alert('Email or password is invalid');
     }
-  }
-  componentDidMount() {
-    // this.authSubscription = firebase.auth().onAuthStateChanged(user => {
-    //   this.setState({ user });
-    // });
   }
   render() {
     return (
@@ -37,7 +33,7 @@ export default class Login extends Component {
         <FormInput keyboardType="email-address" onChangeText={text => this.setState({ email: text })} />
         <FormLabel>Password</FormLabel>
         <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
-        <Button onPress={() => this.login(this.state.email, this.state.password)} title="Login" />
+        <Button onPress={() => this.signup(this.state.email, this.state.password)} title="Sign Up" />
       </View>
     );
   }

@@ -10,6 +10,7 @@ import WishList from './components/WishList';
 import NameForm from './components/NameForm';
 import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -19,16 +20,8 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Text h2>genie</Text>
-        <Button
-          raised
-          title="Login"
-          onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
-        />
-        {/* <Button
-          raised
-          title="Sign Up"
-          onPress={() => this.props.navigation.navigate('Login', { navigation: this.props.navigation })}
-        /> */}
+        <Button raised title="Login" onPress={() => this.props.navigation.navigate('Login')} />
+        <Button raised title="Sign Up" onPress={() => this.props.navigation.navigate('SignUp')} />
       </View>
     );
   }
@@ -52,6 +45,9 @@ export const MainStack = StackNavigator({
   },
   Login: {
     screen: Login,
+  },
+  SignUp: {
+    screen: SignUp,
   },
   WishList: {
     screen: WishList,

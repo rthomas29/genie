@@ -54,7 +54,6 @@ export default class WishList extends Component {
   }
   render() {
     const { params } = this.props.navigation.state;
-    const navigation = params ? params.navigation : null;
     const user = params ? params.user : null;
 
     if (this.state.wishLength === 0) {
@@ -70,9 +69,8 @@ export default class WishList extends Component {
             <Text h4>You don't have any wishes.</Text>
             <Button
               onPress={() =>
-                navigation.navigate('NameForm', {
+                this.props.navigation.navigate('NameForm', {
                   giftName: this.state.giftName,
-                  navigation,
                   getImageUrl: this.getImageUrl,
                 })
               }
