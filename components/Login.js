@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Button, Text, FormInput, FormLabel, SocialIcon } from 'react-native-elements';
-import config from '../config/firebase';
-import * as firebase from 'firebase';
+import firebase from '../config/firebase';
+import { auth } from '../config/firebase';
 import { styles } from '../App';
 
-firebase.initializeApp(config);
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,18 +14,16 @@ export default class Login extends Component {
       user: {},
     };
   }
-  async signup(email, pass) {
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, pass);
-      console.log('Account created');
-      this.setState({ email: '', password: '' });
-      this.props.navigation.navigate('WishList');
-      // Navigate to the Home page, the user is auto logged in
-    } catch (error) {
-      alert('Email or password is invalid');
-      console.log(error.toString());
-    }
-  }
+  // async signup(email, pass) {
+  //   try {
+  //     await firebase.auth().createUserWithEmailAndPassword(email, pass);
+  //     console.log('Account created');
+  //     this.setState({ email: '', password: '' });
+  //     this.props.navigation.navigate('WishList');
+  //   } catch (error) {
+  //     alert('Email or password is invalid');
+  //   }
+  // }
   async login(email, pass) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
@@ -40,9 +37,9 @@ export default class Login extends Component {
     }
   }
   componentDidMount() {
-    this.authSubscription = firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user });
-    });
+    // this.authSubscription = firebase.auth().onAuthStateChanged(user => {
+    //   this.setState({ user });
+    // });
   }
   render() {
     return (

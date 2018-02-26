@@ -6,7 +6,7 @@ import Modal from 'react-native-modal';
 import ImageUpload from './ImageUpload';
 import NameForm from './NameForm';
 import { withNavigation } from 'react-navigation';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 
 export default class WishList extends Component {
   constructor(props) {
@@ -45,7 +45,7 @@ export default class WishList extends Component {
   };
   async logout(nav) {
     try {
-      await firebase.auth().signOut();
+      await auth().signOut();
       console.log('Logged Out');
       nav.navigate('Landing');
     } catch (error) {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from './config/firebase';
+import { database } from './config/firebase';
+import { auth } from './config/firebase';
 import { Button, SocialIcon, Text } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';

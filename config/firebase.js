@@ -1,21 +1,15 @@
-import * as firebase from 'firebase';
-import {
-  FIREBASE_API_KEY,
-  FIREBASE_AUTH_DOMAIN,
-  FIREBASE_DATABASE_URL,
-  FIREBASE_PROJECT_ID,
-  FIREBASE_STORAGE_BUCKET,
-  FIREBASE_MESSAGING_SENDER_ID,
-} from '../config/constants';
+import firebase from 'firebase';
 
 // Initialize Firebase
 var config = {
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_AUTH_DOMAIN,
-  databaseURL: FIREBASE_DATABASE_URL,
-  projectId: FIREBASE_PROJECT_ID,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+  apiKey: 'AIzaSyA8SeHANwbbtHwX3A4clYgkz3bMElUtYas',
+  authDomain: 'genee-19f80.firebaseapp.com',
+  databaseURL: 'https://genee-19f80.firebaseio.com',
+  projectId: 'genee-19f80',
+  storageBucket: 'genee-19f80.appspot.com',
+  messagingSenderId: '932347053527',
 };
 
-export default config;
+firebase.initializeApp(config);
+
+export default firebase;
