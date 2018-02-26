@@ -14,6 +14,18 @@ export default class ImageUpload extends Component {
     };
     this.pickImage = this.pickImage.bind(this);
   }
+  addWishToDb = wishName => {
+    const userId = firebase.auth().currentUser.uid;
+    const wish = {
+      name: wishName,
+      imgUrl: this.state.image,
+    };
+
+    firebase
+      .database()
+      .ref(`${userId}/wishes`)
+      .push(JSON.stringify(wish));
+  };
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -21,24 +33,13 @@ export default class ImageUpload extends Component {
     });
     if (!result.cancelled) {
       this.setState({ image: result.uri });
-      this.getImageUrl(this.state.image);
     }
-    this.addWishToDb(giftName);
   };
-  addWishToDb(wishName) {
-    firebase
-      .database()
-      .ref('/wishes')
-      .push(
-        JSON.stringify({
-          wishName: wishName,
-          imgUrl: this.state.image,
-        }),
-      );
+  componentWillUnmount() {
+    // maybe put db calls here
   }
   render() {
     const { params } = this.props.navigation.state;
-    this.getImageUrl = params ? params.getImageUrl : null;
     this.giftName = params ? params.giftName : null;
     let { image } = this.state;
     return (
@@ -55,7 +56,18 @@ export default class ImageUpload extends Component {
             color: '#000',
           }}
         />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <Button
+          onPress={() => this.addWishToDb(this.giftName)}
+          title="Save Wish"
+          buttonStyle={{
+            backgroundColor: '#fff',
+            borderColor: '#19B5FE',
+            borderRadius: 5,
+          }}
+          textStyle={{
+            color: '#000',
+          }}
+        />
       </View>
     );
   }
