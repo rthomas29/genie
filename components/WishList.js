@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput, Image, TouchableOpacity } from "react-native";
-import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from "react-native-elements";
+import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
 import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
 import NameForm from "./NameForm";
@@ -46,21 +46,13 @@ export default class WishList extends Component {
     const user = params ? params.user : null;
     const { data } = this.state;
 
-    const leftButton = [
-      <TouchableOpacity>
-        <Text>Edit</Text>
-      </TouchableOpacity>,
-    ];
     const rightButton = [
-      <TouchableOpacity>
-        <Text>Delete</Text>
+      <TouchableOpacity style={styles.icon}>
+        <Icon name="delete" />
       </TouchableOpacity>,
     ];
-
-    const rightContent = <Text>Right</Text>;
-
     return (
-      <View>
+      <View style={styles.container}>
         <Text />
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}
@@ -72,7 +64,12 @@ export default class WishList extends Component {
           <List>
             {map(data, (wish, key) => {
               return (
-                <Swipeable key={key} leftButtons={leftButton} rightButtons={rightButton}>
+                <Swipeable
+                  key={key}
+                  style={styles.listItem}
+                  rightButtons={rightButton}
+                  onRightActionRelease={() => alert("right release")}
+                >
                   <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} />
                 </Swipeable>
               );
@@ -103,7 +100,17 @@ export default class WishList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flex: 1,
+    paddingTop: 20,
+  },
+  listItem: {
+    height: 75,
     alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
   },
 });

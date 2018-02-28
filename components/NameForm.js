@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Text, Button, FormLabel, FormInput } from 'react-native-elements';
-import firebase from '../config/firebase';
-import { database } from '../config/firebase';
+import React, { Component } from "react";
+import { View } from "react-native";
+import { Text, Button, FormLabel, FormInput } from "react-native-elements";
+import firebase from "../config/firebase";
+import { database } from "../config/firebase";
 
 export default class NameForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      giftName: '',
+      giftName: "",
     };
     this.handleInput = this.handleInput.bind(this);
   }
@@ -16,7 +16,7 @@ export default class NameForm extends Component {
     this.setState({ giftName: text });
   };
   goToImageUpload = nav => {
-    this.props.navigation.navigate('ImageUpload', { getImageUrl: this.getImageUrl, giftName: this.state.giftName });
+    this.props.navigation.navigate("ImageUpload", { getImageUrl: this.getImageUrl, giftName: this.state.giftName });
     this.setState({ wishLength: this.state.wishLength + 1 });
   };
   sendGiftNameToWishList = (setImageValFunc, currentInputVal, nav) => {
@@ -33,7 +33,7 @@ export default class NameForm extends Component {
       <View>
         <FormLabel>Wish Name</FormLabel>
         <FormInput
-          style={{ height: 10, borderColor: 'gray', borderWidth: 1 }}
+          style={{ height: 10, borderColor: "gray", borderWidth: 1 }}
           onChangeText={text => this.handleInput(text)}
           editable={true}
           height={60}
@@ -41,15 +41,15 @@ export default class NameForm extends Component {
           autoFocus={true}
         />
         <Button
-          onPress={() => this.props.navigation.navigate('ImageUpload', { giftName: this.state.giftName })}
+          onPress={() => this.props.navigation.navigate("ImageUpload", { giftName: this.state.giftName })}
           title="Next"
           buttonStyle={{
-            backgroundColor: '#fff',
-            borderColor: '#19B5FE',
+            backgroundColor: "#fff",
+            borderColor: "#19B5FE",
             borderRadius: 5,
           }}
           textStyle={{
-            color: '#000',
+            color: "#000",
           }}
         />
       </View>
