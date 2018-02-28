@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import firebase from './config/firebase';
-import { database } from './config/firebase';
-import { auth } from './config/firebase';
-import { Button, SocialIcon, Text } from 'react-native-elements';
-import { StyleSheet, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import Landing from './components/Landing';
-import WishList from './components/WishList';
-import NameForm from './components/NameForm';
-import ImageUpload from './components/ImageUpload';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import React, { Component } from "react";
+import firebase from "./config/firebase";
+import { database } from "./config/firebase";
+import { auth } from "./config/firebase";
+import { Button, SocialIcon, Text } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
+import { StackNavigator } from "react-navigation";
+import WishList from "./components/WishList";
+import NameForm from "./components/NameForm";
+import ImageUpload from "./components/ImageUpload";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
-class Home extends React.Component {
+class Landing extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: "Landing",
   };
   render() {
     return (
       <View style={styles.container}>
         <Text h2>genie</Text>
-        <Button raised title="Login" onPress={() => this.props.navigation.navigate('Login')} />
-        <Button raised title="Sign Up" onPress={() => this.props.navigation.navigate('SignUp')} />
+        <Button raised title="Login" onPress={() => this.props.navigation.navigate("Login")} />
+        <Button raised title="Sign Up" onPress={() => this.props.navigation.navigate("SignUp")} />
       </View>
     );
   }
@@ -30,9 +29,9 @@ class Home extends React.Component {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#eee",
+    alignItems: "center",
+    justifyContent: "center",
   },
   social: {
     padding: 10,
@@ -41,7 +40,7 @@ export const styles = StyleSheet.create({
 
 export const MainStack = StackNavigator({
   Landing: {
-    screen: Home,
+    screen: Landing,
   },
   Login: {
     screen: Login,
@@ -67,8 +66,8 @@ const RootStack = StackNavigator(
     },
   },
   {
-    mode: 'modal',
-    headerMode: 'none',
+    mode: "modal",
+    headerMode: "none",
   },
 );
 

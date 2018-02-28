@@ -66,48 +66,39 @@ export default class WishList extends Component {
     const user = params ? params.user : null;
     const { data } = this.state;
 
-    if (this.state.wishLength === 0) {
-      return (
+    return (
+      <View>
+        <Text />
+        <Header
+          leftComponent={{ icon: "menu", color: "#fff" }}
+          centerComponent={{ text: "Genie", style: { color: "#fff" } }}
+          rightComponent={{ icon: "highlight-off", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
+        />
         <View>
-          <Text />
-          <Header
-            leftComponent={{ icon: "menu", color: "#fff" }}
-            centerComponent={{ text: "Genie", style: { color: "#fff" } }}
-            rightComponent={{ icon: "highlight-off", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
+          <Text>Welcome, {user.email}</Text>
+          <List>
+            {map(data, (wish, key) => <ListItem roundAvatar key={key} title={wish.name} avatar={wish.imgUrl} />)}
+          </List>
+          <Button
+            onPress={() =>
+              this.props.navigation.navigate("NameForm", {
+                giftName: this.state.giftName,
+                getImageUrl: this.getImageUrl,
+              })
+            }
+            buttonStyle={{
+              borderColor: "#19B5FE",
+              backgroundColor: "#fff",
+              borderRadius: 5,
+            }}
+            textStyle={{
+              color: "#000",
+            }}
+            title="Create new wish"
           />
-          <View>
-            <Text>Welcome, {user.email}</Text>
-            <List>
-              {map(data, (wish, key) => <ListItem roundAvatar key={key} title={wish.name} avatar={wish.imgUrl} />)}
-            </List>
-            <Button
-              onPress={() =>
-                this.props.navigation.navigate("NameForm", {
-                  giftName: this.state.giftName,
-                  getImageUrl: this.getImageUrl,
-                })
-              }
-              buttonStyle={{
-                borderColor: "#19B5FE",
-                backgroundColor: "#fff",
-                borderRadius: 5,
-              }}
-              textStyle={{
-                color: "#000",
-              }}
-              title="Create new wish"
-            />
-          </View>
         </View>
-      );
-    } else {
-      return (
-        <View>
-          <Text>Name: {this.state.giftName}</Text>
-          <Image source={{ uri: this.state.imgUrl }} style={{ width: 40, height: 40 }} />
-        </View>
-      );
-    }
+      </View>
+    );
   }
 }
 
