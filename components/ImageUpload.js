@@ -38,9 +38,6 @@ export default class ImageUpload extends Component {
       this.setState({ image: result.uri, showSave: !this.state.showSave });
     }
   };
-  componentWillUnmount() {
-    // maybe put db calls here
-  }
   render() {
     const { params } = this.props.navigation.state;
     this.giftName = params ? params.giftName : null;

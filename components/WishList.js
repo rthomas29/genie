@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Image } from 'react-native';
-import { Text, Button, FormLabel, FormInput, SocialIcon, Header } from 'react-native-elements';
+import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from 'react-native-elements';
 import MainStack from '../App';
 import Modal from 'react-native-modal';
 import ImageUpload from './ImageUpload';
 import NameForm from './NameForm';
 import { withNavigation } from 'react-navigation';
-import { auth } from 'firebase';
+import firebase from '../config/firebase';
+import { auth } from '../config/firebase';
+import { database } from '../config/firebase';
+import map from 'lodash/map';
 
 export default class WishList extends Component {
   constructor(props) {
@@ -16,6 +19,7 @@ export default class WishList extends Component {
       modalVisible: false,
       giftName: '',
       imgUrl: '',
+      data: '',
     };
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -45,28 +49,39 @@ export default class WishList extends Component {
   };
   async logout(nav) {
     try {
-      await auth().signOut();
+      await firebase.auth().signOut();
       console.log('Logged Out');
       nav.navigate('Landing');
     } catch (error) {
       console.log(error);
     }
   }
+  componentDidMount() {
+    this.user = firebase.auth().currentUser;
+    firebase
+      .database()
+      .ref(`${this.user.uid}/wishes/`)
+      .on('value', snapshot => {
+        this.setState({ data: snapshot.val() });
+      });
+  }
   render() {
     const { params } = this.props.navigation.state;
     const user = params ? params.user : null;
+    const { data } = this.state;
 
     if (this.state.wishLength === 0) {
       return (
         <View>
+          <Text />
           <Header
             leftComponent={{ icon: 'menu', color: '#fff' }}
             centerComponent={{ text: 'Genie', style: { color: '#fff' } }}
             rightComponent={{ icon: 'highlight-off', color: '#fff', onPress: () => this.logout(this.props.navigation) }}
           />
-          <View style={styles.container}>
+          <View>
             <Text>Welcome, {user.email}</Text>
-            <Text h4>You don't have any wishes.</Text>
+            <List>{map(data, (wish, key) => <ListItem key={key} title={wish.name} />)}</List>
             <Button
               onPress={() =>
                 this.props.navigation.navigate('NameForm', {
@@ -100,7 +115,6 @@ export default class WishList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
