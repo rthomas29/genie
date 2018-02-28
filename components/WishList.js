@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput, Image } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from "react-native-elements";
-import MainStack from "../App";
-import Modal from "react-native-modal";
+import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
 import NameForm from "./NameForm";
 import { withNavigation } from "react-navigation";
@@ -16,29 +15,10 @@ export default class WishList extends Component {
     super(props);
     this.state = {
       wishLength: 0,
-      modalVisible: false,
       giftName: "",
       imgUrl: "",
       data: "",
     };
-    this.showModal = this.showModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.getImageUrl = this.getImageUrl.bind(this);
-  }
-
-  toggleModal() {
-    this.setState({ modalVisible: !this.state.modalVisible });
-  }
-  showModal() {
-    this.setState({ modalVisible: true });
-  }
-  closeModal() {
-    this.setState({
-      modalVisible: false,
-      giftName: "",
-      imgUrl: "",
-    });
   }
   getImageUrl(url) {
     this.setState({ imgUrl: url });
@@ -65,6 +45,8 @@ export default class WishList extends Component {
     const { params } = this.props.navigation.state;
     const user = params ? params.user : null;
     const { data } = this.state;
+    const leftContent = <Text>Left</Text>;
+    const rightContent = <Text>Right</Text>;
 
     return (
       <View>
@@ -77,7 +59,13 @@ export default class WishList extends Component {
         <View>
           <Text>Welcome, {user.email}</Text>
           <List>
-            {map(data, (wish, key) => <ListItem roundAvatar key={key} title={wish.name} avatar={wish.imgUrl} />)}
+            {map(data, (wish, key) => {
+              return (
+                <Swipeable key={key} leftContent={leftContent} rightContent={rightContent}>
+                  <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} />
+                </Swipeable>
+              );
+            })}
           </List>
           <Button
             onPress={() =>
