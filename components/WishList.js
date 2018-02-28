@@ -18,6 +18,7 @@ export default class WishList extends Component {
       giftName: "",
       imgUrl: "",
       data: "",
+      wishToDelete: "",
     };
   }
   getImageUrl(url) {
@@ -36,21 +37,20 @@ export default class WishList extends Component {
       console.log(error);
     }
   }
+  deleteItem = () => {
+    alert("workin");
+  };
   componentDidMount() {
     this.user = firebase.auth().currentUser;
     this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
     this.wishRef.on("value", snapshot => this.setState({ data: snapshot.val() }));
+    this.swipeable = null;
   }
   render() {
     const { params } = this.props.navigation.state;
     const user = params ? params.user : null;
     const { data } = this.state;
-
-    const rightButton = [
-      <TouchableOpacity style={styles.icon}>
-        <Icon name="delete" />
-      </TouchableOpacity>,
-    ];
+    const deleteFunc = this.deleteItem;
     return (
       <View style={styles.container}>
         <Text />
@@ -67,10 +67,16 @@ export default class WishList extends Component {
                 <Swipeable
                   key={key}
                   style={styles.listItem}
-                  rightButtons={rightButton}
-                  onRightActionRelease={() => alert("right release")}
+                  rightContent={
+                    <TouchableOpacity style={styles.icon}>
+                      <Icon name="delete" />
+                    </TouchableOpacity>
+                  }
+                  rightActionActivationDistance={100}
+                  onRef={ref => (this.swipeable = ref)}
+                  onRightActionRelease={() => deleteFunc()}
                 >
-                  <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} />
+                  <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} hideChevron={true} />
                 </Swipeable>
               );
             })}
@@ -111,6 +117,11 @@ const styles = StyleSheet.create({
   icon: {
     flex: 1,
     justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: "row",
     alignItems: "flex-start",
   },
 });
