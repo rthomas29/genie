@@ -58,6 +58,8 @@ export default class WishList extends Component {
   }
   componentDidMount() {
     this.user = firebase.auth().currentUser;
+    this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
+    this.wishRef.on("value", snapshot => this.setState({ data: snapshot.val() }));
   }
   render() {
     const { params } = this.props.navigation.state;
@@ -75,7 +77,7 @@ export default class WishList extends Component {
           />
           <View>
             <Text>Welcome, {user.email}</Text>
-            <List>{map(data, (wish, key) => <ListItem key={key} title={wish} />)}</List>
+            <List>{map(data, (wish, key) => <ListItem key={key} title={wish.name} />)}</List>
             {/* <List>{Object.values(this.state.data).map(wish => console.log(wish))}</List> */}
             <Button
               onPress={() =>
