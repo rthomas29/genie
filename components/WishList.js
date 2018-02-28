@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
 import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
@@ -37,8 +37,8 @@ export default class WishList extends Component {
       console.log(error);
     }
   }
-  deleteItem = () => {
-    alert("workin");
+  deleteItem = key => {
+    this.wishRef.child(key).remove();
   };
   componentDidMount() {
     this.user = firebase.auth().currentUser;
@@ -51,17 +51,17 @@ export default class WishList extends Component {
     const user = params ? params.user : null;
     const { data } = this.state;
     const deleteFunc = this.deleteItem;
+
     const rightButtons = [
-      <TouchableOpacity style={styles.icon} onPress={() => deleteFunc()}>
+      <TouchableOpacity style={styles.icon} onPress={(wish, key) => deleteFunc()}>
         <Icon name="edit" />
       </TouchableOpacity>,
-      <TouchableOpacity style={styles.icon} onPress={() => deleteFunc()}>
+      <TouchableOpacity style={styles.icon}>
         <Icon name="delete" />
       </TouchableOpacity>,
     ];
     return (
       <View style={styles.container}>
-        <Text />
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}
           centerComponent={{ text: "Genie", style: { color: "#fff" } }}
@@ -75,9 +75,15 @@ export default class WishList extends Component {
                 <Swipeable
                   key={key}
                   style={styles.listItem}
-                  rightButtons={rightButtons}
-                  rightActionActivationDistance={100}
+                  rightContent={<Text>Delete</Text>}
+                  rightActionActivationDistance={50}
                   onRef={ref => (this.swipeable = ref)}
+                  onRightActionRelease={() =>
+                    Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
+                      { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                      { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
+                    ])
+                  }
                 >
                   <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} hideChevron={true} />
                 </Swipeable>
