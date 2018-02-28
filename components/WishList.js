@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Image } from "react-native";
+import { StyleSheet, View, TextInput, Image, TouchableOpacity } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from "react-native-elements";
 import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
@@ -45,7 +45,18 @@ export default class WishList extends Component {
     const { params } = this.props.navigation.state;
     const user = params ? params.user : null;
     const { data } = this.state;
-    const leftContent = <Text>Left</Text>;
+
+    const leftButton = [
+      <TouchableOpacity>
+        <Text>Edit</Text>
+      </TouchableOpacity>,
+    ];
+    const rightButton = [
+      <TouchableOpacity>
+        <Text>Delete</Text>
+      </TouchableOpacity>,
+    ];
+
     const rightContent = <Text>Right</Text>;
 
     return (
@@ -61,7 +72,7 @@ export default class WishList extends Component {
           <List>
             {map(data, (wish, key) => {
               return (
-                <Swipeable key={key} leftContent={leftContent} rightContent={rightContent}>
+                <Swipeable key={key} leftButtons={leftButton} rightButtons={rightButton}>
                   <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} />
                 </Swipeable>
               );
