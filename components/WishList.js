@@ -51,6 +51,14 @@ export default class WishList extends Component {
     const user = params ? params.user : null;
     const { data } = this.state;
     const deleteFunc = this.deleteItem;
+    const rightButtons = [
+      <TouchableOpacity style={styles.icon} onPress={() => deleteFunc()}>
+        <Icon name="edit" />
+      </TouchableOpacity>,
+      <TouchableOpacity style={styles.icon} onPress={() => deleteFunc()}>
+        <Icon name="delete" />
+      </TouchableOpacity>,
+    ];
     return (
       <View style={styles.container}>
         <Text />
@@ -67,14 +75,9 @@ export default class WishList extends Component {
                 <Swipeable
                   key={key}
                   style={styles.listItem}
-                  rightContent={
-                    <TouchableOpacity style={styles.icon}>
-                      <Icon name="delete" />
-                    </TouchableOpacity>
-                  }
+                  rightButtons={rightButtons}
                   rightActionActivationDistance={100}
                   onRef={ref => (this.swipeable = ref)}
-                  onRightActionRelease={() => deleteFunc()}
                 >
                   <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} hideChevron={true} />
                 </Swipeable>
