@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Image } from 'react-native';
-import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from 'react-native-elements';
-import MainStack from '../App';
-import Modal from 'react-native-modal';
-import ImageUpload from './ImageUpload';
-import NameForm from './NameForm';
-import { withNavigation } from 'react-navigation';
-import firebase from '../config/firebase';
-import { auth } from '../config/firebase';
-import { database } from '../config/firebase';
-import map from 'lodash/map';
+import React, { Component } from "react";
+import { StyleSheet, View, TextInput, Image } from "react-native";
+import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem } from "react-native-elements";
+import MainStack from "../App";
+import Modal from "react-native-modal";
+import ImageUpload from "./ImageUpload";
+import NameForm from "./NameForm";
+import { withNavigation } from "react-navigation";
+import firebase from "../config/firebase";
+import { auth } from "../config/firebase";
+import { database } from "../config/firebase";
+import map from "lodash/map";
 
 export default class WishList extends Component {
   constructor(props) {
@@ -17,9 +17,9 @@ export default class WishList extends Component {
     this.state = {
       wishLength: 0,
       modalVisible: false,
-      giftName: '',
-      imgUrl: '',
-      data: '',
+      giftName: "",
+      imgUrl: "",
+      data: "",
     };
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -36,22 +36,22 @@ export default class WishList extends Component {
   closeModal() {
     this.setState({
       modalVisible: false,
-      giftName: '',
-      imgUrl: '',
+      giftName: "",
+      imgUrl: "",
     });
   }
   getImageUrl(url) {
     this.setState({ imgUrl: url });
   }
   goToImageUpload = nav => {
-    nav('ImageUpload', { getImageUrl: this.getImageUrl });
+    nav("ImageUpload", { getImageUrl: this.getImageUrl });
     this.setState({ modalVisible: false, wishLength: this.state.wishLength + 1 });
   };
   async logout(nav) {
     try {
       await firebase.auth().signOut();
-      console.log('Logged Out');
-      nav.navigate('Landing');
+      console.log("Logged Out");
+      nav.navigate("Landing");
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +61,7 @@ export default class WishList extends Component {
     firebase
       .database()
       .ref(`${this.user.uid}/wishes/`)
-      .on('value', snapshot => {
+      .on("value", snapshot => {
         this.setState({ data: snapshot.val() });
       });
   }
@@ -75,27 +75,27 @@ export default class WishList extends Component {
         <View>
           <Text />
           <Header
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            centerComponent={{ text: 'Genie', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'highlight-off', color: '#fff', onPress: () => this.logout(this.props.navigation) }}
+            leftComponent={{ icon: "menu", color: "#fff" }}
+            centerComponent={{ text: "Genie", style: { color: "#fff" } }}
+            rightComponent={{ icon: "highlight-off", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
           />
           <View>
             <Text>Welcome, {user.email}</Text>
-            <List>{map(data, (wish, key) => <ListItem key={key} title={wish.name} />)}</List>
+            <List>{map(data, (wish, key) => <ListItem key={key} title={wish} />)}</List>
             <Button
               onPress={() =>
-                this.props.navigation.navigate('NameForm', {
+                this.props.navigation.navigate("NameForm", {
                   giftName: this.state.giftName,
                   getImageUrl: this.getImageUrl,
                 })
               }
               buttonStyle={{
-                borderColor: '#19B5FE',
-                backgroundColor: '#fff',
+                borderColor: "#19B5FE",
+                backgroundColor: "#fff",
                 borderRadius: 5,
               }}
               textStyle={{
-                color: '#000',
+                color: "#000",
               }}
               title="Create new wish"
             />
@@ -115,7 +115,7 @@ export default class WishList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
