@@ -77,8 +77,9 @@ export default class WishList extends Component {
           />
           <View>
             <Text>Welcome, {user.email}</Text>
-            <List>{map(data, (wish, key) => <ListItem key={key} title={wish.name} />)}</List>
-            {/* <List>{Object.values(this.state.data).map(wish => console.log(wish))}</List> */}
+            <List>
+              {map(data, (wish, key) => <ListItem roundAvatar key={key} title={wish.name} avatar={wish.imgUrl} />)}
+            </List>
             <Button
               onPress={() =>
                 this.props.navigation.navigate("NameForm", {
