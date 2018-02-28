@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Text, View, Alert, Image } from 'react-native';
-import { Button } from 'react-native-elements';
-import { ImagePicker } from 'expo';
-import { styles } from '../App';
-import firebase from '../config/firebase';
-import { database } from '../config/firebase';
+import React, { Component } from "react";
+import { Text, View, Alert, Image } from "react-native";
+import { Button } from "react-native-elements";
+import { ImagePicker } from "expo";
+import { styles } from "../App";
+import firebase from "../config/firebase";
+import { database } from "../config/firebase";
 
 export default class ImageUpload extends Component {
   constructor(props) {
@@ -24,10 +24,10 @@ export default class ImageUpload extends Component {
 
     firebase
       .database()
-      .ref(`${this.user.uid}/wishes`)
+      .ref(`wishes/${this.user.uid}`)
       .push(JSON.stringify(wish));
 
-    this.props.navigation.navigate('WishList', { user: this.user });
+    this.props.navigation.navigate("WishList", { user: this.user });
   };
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -50,12 +50,12 @@ export default class ImageUpload extends Component {
             onPress={() => this.pickImage()}
             title="Upload Wish Image"
             buttonStyle={{
-              backgroundColor: '#fff',
-              borderColor: '#19B5FE',
+              backgroundColor: "#fff",
+              borderColor: "#19B5FE",
               borderRadius: 5,
             }}
             textStyle={{
-              color: '#000',
+              color: "#000",
             }}
           />
         </View>
@@ -67,12 +67,12 @@ export default class ImageUpload extends Component {
             onPress={() => this.addWishToDb(this.giftName)}
             title="Save Wish"
             buttonStyle={{
-              backgroundColor: '#fff',
-              borderColor: '#19B5FE',
+              backgroundColor: "#fff",
+              borderColor: "#19B5FE",
               borderRadius: 5,
             }}
             textStyle={{
-              color: '#000',
+              color: "#000",
             }}
           />
         </View>
