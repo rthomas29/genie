@@ -16,16 +16,12 @@ export default class ImageUpload extends Component {
     this.pickImage = this.pickImage.bind(this);
   }
   addWishToDb = wishName => {
-    this.user = firebase.auth().currentUser;
     const wish = {
       name: wishName,
       imgUrl: this.state.image,
     };
 
-    firebase
-      .database()
-      .ref(`wishes/${this.user.uid}`)
-      .push(JSON.stringify(wish));
+    this.wishRef.push(wish);
 
     this.props.navigation.navigate("WishList", { user: this.user });
   };
@@ -38,6 +34,19 @@ export default class ImageUpload extends Component {
       this.setState({ image: result.uri, showSave: !this.state.showSave });
     }
   };
+  addNewWish = () => {
+    this.wishRef.on("child_added", snapshot => {
+      console.log(snapshot.val());
+      // this.setState({ data: snapshot.val() });
+    });
+  };
+  componentDidMount() {
+    this.user = firebase.auth().currentUser;
+    this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
+  }
+  componentWillUnmount() {
+    this.addNewWish();
+  }
   render() {
     const { params } = this.props.navigation.state;
     this.giftName = params ? params.giftName : null;
