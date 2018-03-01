@@ -33,7 +33,7 @@ export default class NameForm extends Component {
       <View>
         <FormLabel>Wish Name</FormLabel>
         <FormInput
-          style={{ height: 10, borderColor: "gray", borderWidth: 1 }}
+          style={{ height: 10 }}
           onChangeText={text => this.handleInput(text)}
           editable={true}
           height={60}

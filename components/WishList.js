@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert, Share } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
-import { withNavigation } from "react-navigation";
+import { DrawerNavigator } from "react-navigation";
 import { auth } from "../config/firebase";
 import { database } from "../config/firebase";
 import Swipeable from "react-native-swipeable";

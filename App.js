@@ -14,6 +14,9 @@ import WishDetail from "./components/WishDetail";
 import Edit from "./components/Edit";
 
 class Landing extends Component {
+  static navigationOptions = {
+    header: null,
+  };
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -94,7 +97,7 @@ export const MainStack = StackNavigator(
     headerMode: "float",
     navigationOptions: {
       headerTitle: "WishList",
-      headerRight: <Icon name="account-circle" size={32} color="#fff" />,
+      headerRight: <Icon name="exit-to-app" size={32} color="#fff" />,
       headerStyle: {
         backgroundColor: "#3498DB",
         headerTitleStyle: {
