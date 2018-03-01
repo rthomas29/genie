@@ -11,9 +11,6 @@ import firebase from "../config/firebase";
 import map from "lodash/map";
 
 export default class WishList extends Component {
-  static navigationOptions = {
-    headerLeft: null,
-  };
   constructor(props) {
     super(props);
     this.state = {

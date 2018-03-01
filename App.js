@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { database } from "./config/firebase";
 import { auth } from "./config/firebase";
-import { Button, SocialIcon, Text } from "react-native-elements";
+import { Button, SocialIcon, Text, Icon } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 import { StackNavigator } from "react-navigation";
 import firebase from "./config/firebase";
@@ -44,43 +44,52 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const MainStack = StackNavigator({
-  initialRouteName: Landing,
-  headerMode: "screen",
-  Landing: {
-    screen: Landing,
+export const MainStack = StackNavigator(
+  {
+    initialRouteName: Landing,
+    Landing: {
+      screen: Landing,
+    },
+    Login: {
+      screen: Login,
+    },
+    SignUp: {
+      screen: SignUp,
+    },
+    WishList: {
+      screen: WishList,
+    },
+    ImageUpload: {
+      screen: ImageUpload,
+    },
+    NameForm: {
+      screen: NameForm,
+    },
+    WishDetail: {
+      screen: WishDetail,
+    },
+    Edit: {
+      screen: Edit,
+    },
   },
-  Login: {
-    screen: Login,
+  {
+    headerMode: "float",
+    navigationOptions: {
+      headerTitle: "WishList",
+      headerRight: <Icon name="account-circle" size={32} color="#fff" />,
+      headerStyle: {
+        backgroundColor: "#3498DB",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      },
+      headerLeft: <Icon name="menu" size={32} color="#fff" />,
+    },
   },
-  SignUp: {
-    screen: SignUp,
-  },
-  WishList: {
-    screen: WishList,
-  },
-  ImageUpload: {
-    screen: ImageUpload,
-  },
-  NameForm: {
-    screen: NameForm,
-  },
-  WishDetail: {
-    screen: WishDetail,
-  },
-  Edit: {
-    screen: Edit,
-  },
-});
-
-const RootStack = StackNavigator({
-  Main: {
-    screen: MainStack,
-  },
-});
+);
 
 export default class App extends Component {
   render() {
-    return <RootStack />;
+    return <MainStack />;
   }
 }
