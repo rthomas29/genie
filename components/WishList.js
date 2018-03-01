@@ -51,6 +51,7 @@ export default class WishList extends Component {
     const user = params ? params.user : null;
     const { data } = this.state;
     const deleteFunc = this.deleteItem;
+    const navigate = this.props.navigation.navigate;
 
     return (
       <View style={styles.container}>
@@ -67,16 +68,7 @@ export default class WishList extends Component {
                 <Swipeable
                   key={key}
                   style={styles.listItem}
-                  leftContent={
-                    <Text
-                      style={{
-                        flex: 1,
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      Edit
-                    </Text>
-                  }
+                  leftContent={<Text>Edit</Text>}
                   rightContent={<Text>Delete</Text>}
                   leftActionActivationDistance={50}
                   rightActionActivationDistance={50}
@@ -84,7 +76,7 @@ export default class WishList extends Component {
                   onLeftActionRelease={() =>
                     Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
                       { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
-                      { text: "Yes, I'm sure", onPress: () => console.log("edit") },
+                      { text: "Yes, I'm sure", onPress: () => navigate("Edit", { wish: wish }) },
                     ])
                   }
                   onRightActionRelease={() =>
