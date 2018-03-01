@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
+import { withNavigation } from "react-navigation";
+import { auth } from "../config/firebase";
+import { database } from "../config/firebase";
 import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
 import NameForm from "./NameForm";
-import { withNavigation } from "react-navigation";
 import firebase from "../config/firebase";
-import { auth } from "../config/firebase";
-import { database } from "../config/firebase";
 import map from "lodash/map";
 
 export default class WishList extends Component {
@@ -52,14 +52,6 @@ export default class WishList extends Component {
     const { data } = this.state;
     const deleteFunc = this.deleteItem;
 
-    const rightButtons = [
-      <TouchableOpacity style={styles.icon} onPress={(wish, key) => deleteFunc()}>
-        <Icon name="edit" />
-      </TouchableOpacity>,
-      <TouchableOpacity style={styles.icon}>
-        <Icon name="delete" />
-      </TouchableOpacity>,
-    ];
     return (
       <View style={styles.container}>
         <Header
@@ -85,7 +77,15 @@ export default class WishList extends Component {
                     ])
                   }
                 >
-                  <ListItem roundAvatar title={wish.name} avatar={wish.imgUrl} hideChevron={true} />
+                  <ListItem
+                    roundAvatar
+                    title={wish.name}
+                    avatar={wish.imgUrl}
+                    hideChevron={true}
+                    onPress={() =>
+                      this.props.navigation.navigate("WishDetail", { name: wish.name, imgUrl: wish.imgUrl })
+                    }
+                  />
                 </Swipeable>
               );
             })}

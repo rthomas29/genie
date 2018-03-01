@@ -10,6 +10,7 @@ import NameForm from "./components/NameForm";
 import ImageUpload from "./components/ImageUpload";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import WishDetail from "./components/WishDetail";
 
 class Landing extends Component {
   static navigationOptions = {
@@ -56,6 +57,9 @@ export const MainStack = StackNavigator({
   },
   NameForm: {
     screen: NameForm,
+  },
+  WishDetail: {
+    screen: WishDetail,
   },
 });
 
