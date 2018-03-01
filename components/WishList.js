@@ -76,7 +76,16 @@ export default class WishList extends Component {
                   onLeftActionRelease={() =>
                     Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
                       { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
-                      { text: "Yes, I'm sure", onPress: () => navigate("Edit", { wish: wish }) },
+                      {
+                        text: "Yes, I'm sure",
+                        onPress: () =>
+                          navigate("Edit", {
+                            wish: wish,
+                            wishRef: this.wishRef,
+                            user: this.user,
+                            key: key,
+                          }),
+                      },
                     ])
                   }
                   onRightActionRelease={() =>
@@ -92,7 +101,10 @@ export default class WishList extends Component {
                     avatar={wish.imgUrl}
                     hideChevron={true}
                     onPress={() =>
-                      this.props.navigation.navigate("WishDetail", { name: wish.name, imgUrl: wish.imgUrl })
+                      this.props.navigation.navigate("WishDetail", {
+                        name: wish.name,
+                        imgUrl: wish.imgUrl,
+                      })
                     }
                   />
                 </Swipeable>
