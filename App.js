@@ -14,9 +14,6 @@ import WishDetail from "./components/WishDetail";
 import Edit from "./components/Edit";
 
 class Landing extends Component {
-  static navigationOptions = {
-    title: "Landing",
-  };
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -49,6 +46,7 @@ export const styles = StyleSheet.create({
 
 export const MainStack = StackNavigator({
   initialRouteName: Landing,
+  headerMode: "screen",
   Landing: {
     screen: Landing,
   },
@@ -75,17 +73,11 @@ export const MainStack = StackNavigator({
   },
 });
 
-const RootStack = StackNavigator(
-  {
-    Main: {
-      screen: MainStack,
-    },
+const RootStack = StackNavigator({
+  Main: {
+    screen: MainStack,
   },
-  {
-    mode: "modal",
-    headerMode: "none",
-  },
-);
+});
 
 export default class App extends Component {
   render() {

@@ -11,6 +11,9 @@ import firebase from "../config/firebase";
 import map from "lodash/map";
 
 export default class WishList extends Component {
+  static navigationOptions = {
+    headerLeft: null,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -55,114 +58,119 @@ export default class WishList extends Component {
 
     return (
       <View style={styles.container}>
-        <Header
-          leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "Genie", style: { color: "#fff" } }}
-          rightComponent={{ icon: "account-circle", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
+        <Text h4>Welcome, {user.email}</Text>
+        <List>
+          {map(data, (wish, key) => {
+            return (
+              <Swipeable
+                key={key}
+                style={styles.listItem}
+                leftContent={
+                  <View style={[styles.leftSwipeItem, { backgroundColor: "rgb(25, 181, 254)" }]}>
+                    <Text>Edit</Text>
+                  </View>
+                }
+                rightContent={
+                  <Text style={[styles.rightSwipeItem, { backgroundColor: "rgb(242, 38, 19)" }]}>Delete</Text>
+                }
+                leftActionActivationDistance={100}
+                rightActionActivationDistance={100}
+                onRef={ref => (this.swipeable = ref)}
+                onLeftActionRelease={() =>
+                  Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
+                    { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                    {
+                      text: "Yes, I'm sure",
+                      onPress: () =>
+                        navigate("Edit", {
+                          wish: wish,
+                          wishRef: this.wishRef,
+                          user: this.user,
+                          key: key,
+                        }),
+                    },
+                  ])
+                }
+                onRightActionRelease={() =>
+                  Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
+                    { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                    { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
+                  ])
+                }
+              >
+                <ListItem
+                  roundAvatar
+                  title={wish.name}
+                  avatar={wish.imgUrl}
+                  hideChevron={true}
+                  onPress={() =>
+                    this.props.navigation.navigate("WishDetail", {
+                      name: wish.name,
+                      imgUrl: wish.imgUrl,
+                    })
+                  }
+                />
+              </Swipeable>
+            );
+          })}
+        </List>
+        <Button
+          onPress={() =>
+            this.props.navigation.navigate("NameForm", {
+              giftName: this.state.giftName,
+              getImageUrl: this.getImageUrl,
+            })
+          }
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#fff",
+            borderRadius: 5,
+          }}
+          textStyle={{
+            color: "#000",
+          }}
+          title="Create new wish"
         />
-        <View>
-          <Text>Welcome, {user.email}</Text>
-          <List>
-            {map(data, (wish, key) => {
-              return (
-                <Swipeable
-                  key={key}
-                  style={styles.listItem}
-                  leftContent={
-                    <Text
-                      style={{
-                        backgroundColor: "rgb(247, 202, 24)",
-                      }}
-                    >
-                      Edit
-                    </Text>
-                  }
-                  rightContent={
-                    <Text
-                      style={{
-                        backgroundColor: "rgb(242, 38, 19)",
-                      }}
-                    >
-                      Delete
-                    </Text>
-                  }
-                  leftActionActivationDistance={100}
-                  rightActionActivationDistance={100}
-                  onRef={ref => (this.swipeable = ref)}
-                  onLeftActionRelease={() =>
-                    Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
-                      { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
-                      {
-                        text: "Yes, I'm sure",
-                        onPress: () =>
-                          navigate("Edit", {
-                            wish: wish,
-                            wishRef: this.wishRef,
-                            user: this.user,
-                            key: key,
-                          }),
-                      },
-                    ])
-                  }
-                  onRightActionRelease={() =>
-                    Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
-                      { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
-                      { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
-                    ])
-                  }
-                >
-                  <ListItem
-                    roundAvatar
-                    title={wish.name}
-                    avatar={wish.imgUrl}
-                    hideChevron={true}
-                    onPress={() =>
-                      this.props.navigation.navigate("WishDetail", {
-                        name: wish.name,
-                        imgUrl: wish.imgUrl,
-                      })
-                    }
-                  />
-                </Swipeable>
-              );
-            })}
-          </List>
-          <Button
-            onPress={() =>
-              this.props.navigation.navigate("NameForm", {
-                giftName: this.state.giftName,
-                getImageUrl: this.getImageUrl,
-              })
-            }
-            buttonStyle={{
-              borderColor: "#19B5FE",
-              backgroundColor: "#fff",
-              borderRadius: 5,
-            }}
-            textStyle={{
-              color: "#000",
-            }}
-            title="Create new wish"
-          />
-          <Button
-            onPress={() =>
-              Share.share({
-                message: "Testing the share",
-                url: undefined,
-                title: "Shared Thing",
-              })
-            }
-            buttonStyle={{
-              borderColor: "#19B5FE",
-              backgroundColor: "#fff",
-              borderRadius: 5,
-            }}
-            textStyle={{
-              color: "#000",
-            }}
-            title="Share Wish List"
-          />
-        </View>
+        <Button
+          onPress={() =>
+            Share.share(
+              {
+                message: "Someone is sending you a WishList!",
+                url: "exp://8p-xqk.rthomas29.wishlist.exp.direct:80",
+                subject: "Join Genie to view your friend's WishList",
+              },
+              {
+                dialogTitle: "Share WishList",
+                excludedActivityTypes: [
+                  "com.apple.UIKit.activity.PostToFacebook",
+                  "com.apple.UIKit.activity.PostToTwitter",
+                  "com.apple.UIKit.activity.PostToWeibo",
+                  "com.apple.UIKit.activity.Print",
+                  "com.apple.UIKit.activity.CopyToPasteboard",
+                  "com.apple.UIKit.activity.AssignToContact",
+                  "com.apple.UIKit.activity.SaveToCameraRoll",
+                  "com.apple.UIKit.activity.AddToReadingList",
+                  "com.apple.UIKit.activity.PostToFlickr",
+                  "com.apple.UIKit.activity.PostToVimeo",
+                  "com.apple.UIKit.activity.PostToTencentWeibo",
+                  "com.apple.UIKit.activity.AirDrop",
+                  "com.apple.UIKit.activity.OpenInIBooks",
+                  "com.apple.UIKit.activity.MarkupAsPDF",
+                  "com.apple.UIKit.activity.Slack",
+                ],
+              },
+            )
+          }
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#fff",
+            borderRadius: 5,
+          }}
+          textStyle={{
+            color: "#000",
+          }}
+          title="Share Wish List"
+        />
       </View>
     );
   }
@@ -177,14 +185,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  icon: {
+  leftSwipeItem: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "flex-end",
+    justifyContent: "center",
+    paddingRight: 20,
   },
-  buttons: {
+  rightSwipeItem: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-start",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingLeft: 20,
   },
 });
