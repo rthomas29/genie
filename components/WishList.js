@@ -67,9 +67,26 @@ export default class WishList extends Component {
                 <Swipeable
                   key={key}
                   style={styles.listItem}
+                  leftContent={
+                    <Text
+                      style={{
+                        flex: 1,
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      Edit
+                    </Text>
+                  }
                   rightContent={<Text>Delete</Text>}
+                  leftActionActivationDistance={50}
                   rightActionActivationDistance={50}
                   onRef={ref => (this.swipeable = ref)}
+                  onLeftActionRelease={() =>
+                    Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
+                      { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                      { text: "Yes, I'm sure", onPress: () => console.log("edit") },
+                    ])
+                  }
                   onRightActionRelease={() =>
                     Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
                       { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },

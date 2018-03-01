@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import firebase from "./config/firebase";
 import { database } from "./config/firebase";
 import { auth } from "./config/firebase";
 import { Button, SocialIcon, Text } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 import { StackNavigator } from "react-navigation";
+import firebase from "./config/firebase";
 import WishList from "./components/WishList";
 import NameForm from "./components/NameForm";
 import ImageUpload from "./components/ImageUpload";
