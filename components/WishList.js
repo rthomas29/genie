@@ -55,7 +55,14 @@ export default class WishList extends Component {
 
     return (
       <View style={styles.container}>
-        <Text h4>Welcome, {user.email}</Text>
+        <Text
+          h4
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Welcome, {user.email}
+        </Text>
         <List>
           {map(data, (wish, key) => {
             return (
@@ -112,6 +119,7 @@ export default class WishList extends Component {
           })}
         </List>
         <Button
+          rounded
           onPress={() =>
             this.props.navigation.navigate("NameForm", {
               giftName: this.state.giftName,
@@ -119,9 +127,8 @@ export default class WishList extends Component {
             })
           }
           buttonStyle={{
-            borderColor: "#19B5FE",
-            backgroundColor: "#fff",
-            borderRadius: 5,
+            backgroundColor: "#3498DB",
+            marginBottom: 10,
           }}
           textStyle={{
             color: "#000",
@@ -129,6 +136,7 @@ export default class WishList extends Component {
           title="Create new wish"
         />
         <Button
+          rounded
           onPress={() =>
             Share.share(
               {
@@ -160,8 +168,7 @@ export default class WishList extends Component {
           }
           buttonStyle={{
             borderColor: "#19B5FE",
-            backgroundColor: "#fff",
-            borderRadius: 5,
+            backgroundColor: "#3498DB",
           }}
           textStyle={{
             color: "#000",

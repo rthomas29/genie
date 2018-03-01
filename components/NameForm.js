@@ -41,13 +41,14 @@ export default class NameForm extends Component {
           autoFocus={true}
         />
         <Button
+          rounded
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#3498DB",
+            marginBottom: 10,
+          }}
           onPress={() => this.props.navigation.navigate("ImageUpload", { giftName: this.state.giftName })}
           title="Next"
-          buttonStyle={{
-            backgroundColor: "#fff",
-            borderColor: "#19B5FE",
-            borderRadius: 5,
-          }}
           textStyle={{
             color: "#000",
           }}

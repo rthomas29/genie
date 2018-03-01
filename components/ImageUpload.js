@@ -54,10 +54,11 @@ export default class ImageUpload extends Component {
         <Button
           onPress={() => this.pickImage()}
           title="Upload Wish Image"
+          rounded
           buttonStyle={{
-            backgroundColor: "#fff",
             borderColor: "#19B5FE",
-            borderRadius: 5,
+            backgroundColor: "#3498DB",
+            marginBottom: 10,
           }}
           textStyle={{
             color: "#000",

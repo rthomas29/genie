@@ -34,7 +34,18 @@ export default class Login extends Component {
         <FormInput keyboardType="email-address" onChangeText={text => this.setState({ email: text })} />
         <FormLabel>Password</FormLabel>
         <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
-        <Button onPress={() => this.login(this.state.email, this.state.password)} title="Login" />
+        <Button
+          rounded
+          raised
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#3498DB",
+            borderRadius: 5,
+            marginBottom: 10,
+          }}
+          onPress={() => this.login(this.state.email, this.state.password)}
+          title="Login"
+        />
       </View>
     );
   }

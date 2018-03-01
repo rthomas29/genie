@@ -25,8 +25,26 @@ class Landing extends Component {
     return (
       <View style={styles.container}>
         <Text h2>genie</Text>
-        <Button raised title="Login" onPress={() => this.props.navigation.navigate("Login")} />
-        <Button raised title="Sign Up" onPress={() => this.props.navigation.navigate("SignUp")} />
+        <Button
+          rounded
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#3498DB",
+            marginBottom: 10,
+          }}
+          title="Login"
+          onPress={() => this.props.navigation.navigate("Login")}
+        />
+        <Button
+          rounded
+          buttonStyle={{
+            borderColor: "#19B5FE",
+            backgroundColor: "#3498DB",
+            marginBottom: 10,
+          }}
+          title="Sign Up"
+          onPress={() => this.props.navigation.navigate("SignUp")}
+        />
       </View>
     );
   }
