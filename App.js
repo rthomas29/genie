@@ -17,6 +17,13 @@ class Landing extends Component {
   static navigationOptions = {
     title: "Landing",
   };
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate("WishList", { user: user });
+      }
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -41,6 +48,7 @@ export const styles = StyleSheet.create({
 });
 
 export const MainStack = StackNavigator({
+  initialRouteName: Landing,
   Landing: {
     screen: Landing,
   },

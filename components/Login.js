@@ -26,11 +26,7 @@ export default class Login extends Component {
       console.log(error.toString());
     }
   }
-  componentDidMount() {
-    // this.authSubscription = firebase.auth().onAuthStateChanged(user => {
-    //   this.setState({ user });
-    // });
-  }
+  componentDidMount() {}
   render() {
     return (
       <View style={styles.container}>
