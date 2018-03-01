@@ -32,6 +32,7 @@ export default class ImageUpload extends Component {
     });
     if (!result.cancelled) {
       this.setState({ image: result.uri, showSave: !this.state.showSave });
+      this.addWishToDb(this.giftName);
     }
   };
   addNewWish = () => {
@@ -51,41 +52,21 @@ export default class ImageUpload extends Component {
     const { params } = this.props.navigation.state;
     this.giftName = params ? params.giftName : null;
     let { image } = this.state;
-
-    if (this.state.showSave === false) {
-      return (
-        <View style={styles.container}>
-          <Button
-            onPress={() => this.pickImage()}
-            title="Upload Wish Image"
-            buttonStyle={{
-              backgroundColor: "#fff",
-              borderColor: "#19B5FE",
-              borderRadius: 5,
-            }}
-            textStyle={{
-              color: "#000",
-            }}
-          />
-        </View>
-      );
-    } else if (this.state.showSave) {
-      return (
-        <View style={styles.container}>
-          <Button
-            onPress={() => this.addWishToDb(this.giftName)}
-            title="Save Wish"
-            buttonStyle={{
-              backgroundColor: "#fff",
-              borderColor: "#19B5FE",
-              borderRadius: 5,
-            }}
-            textStyle={{
-              color: "#000",
-            }}
-          />
-        </View>
-      );
-    }
+    return (
+      <View style={styles.container}>
+        <Button
+          onPress={() => this.pickImage()}
+          title="Upload Wish Image"
+          buttonStyle={{
+            backgroundColor: "#fff",
+            borderColor: "#19B5FE",
+            borderRadius: 5,
+          }}
+          textStyle={{
+            color: "#000",
+          }}
+        />
+      </View>
+    );
   }
 }
