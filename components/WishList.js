@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert, Share } from "react-native";
 import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { auth } from "../config/firebase";
@@ -107,12 +107,29 @@ export default class WishList extends Component {
             }}
             title="Create new wish"
           />
+          <Button
+            onPress={() =>
+              Share.share({
+                message: "Testing the share",
+                url: undefined,
+                title: "Shared Thing",
+              })
+            }
+            buttonStyle={{
+              borderColor: "#19B5FE",
+              backgroundColor: "#fff",
+              borderRadius: 5,
+            }}
+            textStyle={{
+              color: "#000",
+            }}
+            title="Share Wish List"
+          />
         </View>
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
