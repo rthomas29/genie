@@ -3,27 +3,24 @@ import { Text, View, Alert, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { ImagePicker } from "expo";
 import { styles } from "../App";
-import firebase from "../config/firebase";
 import { database } from "../config/firebase";
+import firebase from "../config/firebase";
 
 export default class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
       image: null,
-      showSave: false,
     };
     this.pickImage = this.pickImage.bind(this);
   }
   addWishToDb = wishName => {
+    this.props.navigation.navigate("WishList", { user: this.user });
     const wish = {
       name: wishName,
       imgUrl: this.state.image,
     };
-
     this.wishRef.push(wish);
-
-    this.props.navigation.navigate("WishList", { user: this.user });
   };
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -31,7 +28,7 @@ export default class ImageUpload extends Component {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      this.setState({ image: result.uri, showSave: !this.state.showSave });
+      this.setState({ image: result.uri });
       this.addWishToDb(this.giftName);
     }
   };

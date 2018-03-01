@@ -57,7 +57,7 @@ export default class WishList extends Component {
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}
           centerComponent={{ text: "Genie", style: { color: "#fff" } }}
-          rightComponent={{ icon: "highlight-off", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
+          rightComponent={{ icon: "account-circle", color: "#fff", onPress: () => this.logout(this.props.navigation) }}
         />
         <View>
           <Text>Welcome, {user.email}</Text>
