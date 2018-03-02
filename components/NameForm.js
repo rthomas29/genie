@@ -28,7 +28,6 @@ export default class NameForm extends Component {
         <Button
           rounded
           buttonStyle={{
-            borderColor: "#19B5FE",
             backgroundColor: "#3498DB",
             marginBottom: 10,
           }}
