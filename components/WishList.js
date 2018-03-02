@@ -86,7 +86,7 @@ export default class WishList extends Component {
                 rightActionActivationDistance={100}
                 onLeftActionRelease={() =>
                   Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
-                    { text: "Nevermind", style: "cancel" },
+                    { text: "Nope", style: "cancel" },
                     {
                       text: "Yes, I'm sure",
                       onPress: () =>
@@ -101,7 +101,7 @@ export default class WishList extends Component {
                 }
                 onRightActionRelease={() =>
                   Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
-                    { text: "Nevermind", style: "cancel" },
+                    { text: "Nope", style: "cancel" },
                     { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
                   ])
                 }
