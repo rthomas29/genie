@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Alert, Image } from "react-native";
+import { View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { ImagePicker } from "expo";
 import { styles } from "../App";

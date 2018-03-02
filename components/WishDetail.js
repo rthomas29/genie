@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Text, Tile, Icon } from "react-native-elements";
+import { Tile } from "react-native-elements";
 
 export default class WishDetail extends Component {
-  constructor(props) {
-    super(props);
-  }
   static navigationOptions = {
     title: "Item Details",
   };

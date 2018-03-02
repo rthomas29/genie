@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { database } from "./config/firebase";
-import { auth } from "./config/firebase";
 import { Button, SocialIcon, Text, Icon } from "react-native-elements";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { StackNavigator } from "react-navigation";
 import firebase from "./config/firebase";
 import WishList from "./components/WishList";
@@ -18,15 +16,12 @@ class Landing extends Component {
     header: null,
   };
 
-  async componentDidMount() {
-    try {
-      const user = await firebase.auth().onAuthStateChanged();
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.props.navigation.navigate("WishList", { user: user, nav: this.props.navigation });
       }
-    } catch (err) {
-      console.log(err.message);
-    }
+    });
   }
   render() {
     return (
@@ -62,6 +57,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#eee",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  loading: {
+    flex: 1,
     justifyContent: "center",
   },
   social: {

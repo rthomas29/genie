@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Button, Text, FormInput, FormLabel, SocialIcon } from "react-native-elements";
-import firebase from "../config/firebase";
+import { Button, FormInput, FormLabel } from "react-native-elements";
 import { styles } from "../App";
+import firebase from "../config/firebase";
 
 export default class Login extends Component {
   static navigationOptions = {

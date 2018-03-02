@@ -38,12 +38,11 @@ export default class Edit extends Component {
     try {
       await this.wishRef.child(key).update(wish);
       this.props.navigation.navigate("WishList", { user: this.user });
-      console.log("updated");
     } catch (error) {
       console.log(error);
     }
   };
-  componentDidMount() {
+  componentWillMount() {
     const { params } = this.props.navigation.state;
     this.user = params.user;
     this.wishRef = params.wishRef;

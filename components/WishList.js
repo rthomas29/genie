@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Image, TouchableOpacity, Alert, Share } from "react-native";
-import { Text, Button, FormLabel, FormInput, SocialIcon, Header, List, ListItem, Icon } from "react-native-elements";
-import { DrawerNavigator } from "react-navigation";
-import { auth } from "../config/firebase";
-import { database } from "../config/firebase";
+import { StyleSheet, View, Image, Alert, Share } from "react-native";
+import { Text, Button, FormLabel, FormInput, List, ListItem, Icon } from "react-native-elements";
 import Swipeable from "react-native-swipeable";
 import ImageUpload from "./ImageUpload";
 import NameForm from "./NameForm";
@@ -35,16 +32,14 @@ export default class WishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wishLength: 0,
       giftName: "",
       imgUrl: "",
       data: "",
-      wishToDelete: "",
     };
   }
-  getImageUrl(url) {
+  getImageUrl = url => {
     this.setState({ imgUrl: url });
-  }
+  };
   goToImageUpload = nav => {
     nav("ImageUpload", { getImageUrl: this.getImageUrl });
   };
@@ -138,12 +133,7 @@ export default class WishList extends Component {
         </List>
         <Button
           rounded
-          onPress={() =>
-            this.props.navigation.navigate("NameForm", {
-              giftName: this.state.giftName,
-              getImageUrl: this.getImageUrl,
-            })
-          }
+          onPress={() => this.props.navigation.navigate("NameForm")}
           buttonStyle={{
             backgroundColor: "#3498DB",
             marginBottom: 10,

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Text, Button, FormLabel, FormInput } from "react-native-elements";
+import { Button, FormLabel, FormInput } from "react-native-elements";
 import firebase from "../config/firebase";
-import { database } from "../config/firebase";
 
 export default class NameForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       giftName: "",
     };
@@ -19,16 +18,7 @@ export default class NameForm extends Component {
     this.props.navigation.navigate("ImageUpload", { getImageUrl: this.getImageUrl, giftName: this.state.giftName });
     this.setState({ wishLength: this.state.wishLength + 1 });
   };
-  sendGiftNameToWishList = (setImageValFunc, currentInputVal, nav) => {
-    setImageValFunc(currentInputVal);
-    this.goToImageUpload(nav);
-  };
   render() {
-    const { params } = this.props.navigation.state;
-    const giftName = params ? params.giftName : null;
-    const navigation = params ? params.navigation : null;
-    const getImageUrl = params ? params.getImageUrl : null;
-
     return (
       <View>
         <FormLabel>Wish Name</FormLabel>
