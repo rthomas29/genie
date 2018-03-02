@@ -22,11 +22,9 @@ export default class Login extends Component {
       await firebase.auth().signInWithEmailAndPassword(email, pass);
       const user = firebase.auth().currentUser;
       this.setState({ user });
-      console.log(user);
       this.props.navigation.navigate("WishList", { user: this.state.user });
     } catch (error) {
       alert("Invalid user");
-      console.log(error.toString());
     }
   }
   componentDidMount() {}

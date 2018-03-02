@@ -17,12 +17,16 @@ class Landing extends Component {
   static navigationOptions = {
     header: null,
   };
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged(user => {
+
+  async componentDidMount() {
+    try {
+      const user = await firebase.auth().onAuthStateChanged();
       if (user) {
         this.props.navigation.navigate("WishList", { user: user, nav: this.props.navigation });
       }
-    });
+    } catch (err) {
+      console.log(err.message);
+    }
   }
   render() {
     return (
@@ -99,14 +103,10 @@ export const MainStack = StackNavigator(
       headerBackTitle: "Back",
       headerStyle: {
         backgroundColor: "#3498DB",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
       },
     },
   },
 );
-
 export default class App extends Component {
   render() {
     return <MainStack />;

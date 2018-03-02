@@ -47,21 +47,12 @@ export default class WishList extends Component {
   }
   goToImageUpload = nav => {
     nav("ImageUpload", { getImageUrl: this.getImageUrl });
-    this.setState({ modalVisible: false, wishLength: this.state.wishLength + 1 });
   };
-  async logout(nav) {
-    try {
-      await firebase.auth().signOut();
-      console.log("Logged Out");
-      nav.navigate("Landing");
-    } catch (error) {
-      console.log(error);
-    }
-  }
   deleteItem = key => {
     this.wishRef.child(key).remove();
   };
   componentDidMount() {
+    console.log("wishlist mounted");
     this.user = firebase.auth().currentUser;
     this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
     this.wishRef.on("value", snapshot => this.setState({ data: snapshot.val() }));
@@ -168,7 +159,7 @@ export default class WishList extends Component {
           onPress={() =>
             Share.share(
               {
-                message: "Someone is sending you a WishList!",
+                message: "Join genie!",
                 url: "exp://8p-xqk.rthomas29.wishlist.exp.direct:80",
                 subject: "Join Genie to view your friend's WishList",
               },

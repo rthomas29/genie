@@ -5,11 +5,14 @@ import firebase from "../config/firebase";
 import { ImagePicker } from "expo";
 
 export default class Edit extends Component {
+  static navigationOptions = {
+    headerTitle: "Edit",
+  };
   constructor(props) {
     super(props);
     this.state = {
       wishName: "",
-      wishUrl: "",
+      wishUrl: null,
       key: "",
     };
     this.handleChange = this.handleChange.bind(this);
