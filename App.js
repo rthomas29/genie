@@ -20,7 +20,7 @@ class Landing extends Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.navigate("WishList", { user: user });
+        this.props.navigation.navigate("WishList", { user: user, nav: this.props.navigation });
       }
     });
   }
@@ -96,15 +96,13 @@ export const MainStack = StackNavigator(
   {
     headerMode: "float",
     navigationOptions: {
-      headerTitle: "WishList",
-      headerRight: <Icon name="exit-to-app" size={32} color="#fff" />,
+      headerBackTitle: "Back",
       headerStyle: {
         backgroundColor: "#3498DB",
         headerTitleStyle: {
           fontWeight: "bold",
         },
       },
-      headerLeft: <Icon name="menu" size={32} color="#fff" />,
     },
   },
 );

@@ -11,6 +11,27 @@ import firebase from "../config/firebase";
 import map from "lodash/map";
 
 export default class WishList extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+    const nav = params ? params.nav : null;
+    return {
+      headerLeft: null,
+      headerTitle: "WishList",
+      headerRight: (
+        <Icon
+          name="exit-to-app"
+          size={32}
+          color="#fff"
+          onPress={() => {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => navigation.navigate("Landing"));
+          }}
+        />
+      ),
+    };
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -70,8 +91,14 @@ export default class WishList extends Component {
                 key={key}
                 style={styles.listItem}
                 leftContent={
-                  <View style={[styles.leftSwipeItem, { backgroundColor: "rgb(25, 181, 254)" }]}>
-                    <Text>Edit</Text>
+                  <View style={[styles.leftSwipeItem, { backgroundColor: "rgb(25, 181, 254)", alignSelf: "stretch" }]}>
+                    <Text
+                      style={{
+                        flex: 1,
+                      }}
+                    >
+                      Edit
+                    </Text>
                   </View>
                 }
                 rightContent={
@@ -129,6 +156,7 @@ export default class WishList extends Component {
           buttonStyle={{
             backgroundColor: "#3498DB",
             marginBottom: 10,
+            marginTop: 10,
           }}
           textStyle={{
             color: "#000",
@@ -185,7 +213,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   listItem: {
-    height: 75,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },

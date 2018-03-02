@@ -5,6 +5,9 @@ import firebase from "../config/firebase";
 import { styles } from "../App";
 
 export default class Login extends Component {
+  static navigationOptions = {
+    headerLeft: null,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +39,9 @@ export default class Login extends Component {
         <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
         <Button
           rounded
-          raised
           buttonStyle={{
             borderColor: "#19B5FE",
             backgroundColor: "#3498DB",
-            borderRadius: 5,
             marginBottom: 10,
           }}
           onPress={() => this.login(this.state.email, this.state.password)}
