@@ -27,7 +27,6 @@ export default class Login extends Component {
       alert("Invalid user");
     }
   }
-  componentDidMount() {}
   render() {
     return (
       <View style={styles.container}>
