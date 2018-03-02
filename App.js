@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Button, SocialIcon, Text, Icon } from "react-native-elements";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { Button, Text } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
 import { StackNavigator } from "react-navigation";
 import firebase from "./config/firebase";
 import WishList from "./components/WishList";
@@ -32,7 +32,9 @@ class Landing extends Component {
           buttonStyle={{
             borderColor: "#19B5FE",
             backgroundColor: "#3498DB",
+            marginTop: 10,
             marginBottom: 10,
+            width: 280,
           }}
           title="Login"
           onPress={() => this.props.navigation.navigate("Login")}
@@ -43,6 +45,7 @@ class Landing extends Component {
             borderColor: "#19B5FE",
             backgroundColor: "#3498DB",
             marginBottom: 10,
+            width: 280,
           }}
           title="Sign Up"
           onPress={() => this.props.navigation.navigate("SignUp")}
@@ -58,13 +61,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#eee",
     alignItems: "center",
     justifyContent: "center",
-  },
-  loading: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  social: {
-    padding: 10,
   },
 });
 

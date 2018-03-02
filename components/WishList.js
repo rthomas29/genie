@@ -29,29 +29,21 @@ export default class WishList extends Component {
       ),
     };
   };
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       giftName: "",
       imgUrl: "",
       data: "",
     };
   }
-  getImageUrl = url => {
-    this.setState({ imgUrl: url });
-  };
-  goToImageUpload = nav => {
-    nav("ImageUpload", { getImageUrl: this.getImageUrl });
-  };
   deleteItem = key => {
     this.wishRef.child(key).remove();
   };
   componentDidMount() {
-    console.log("wishlist mounted");
     this.user = firebase.auth().currentUser;
     this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
     this.wishRef.on("value", snapshot => this.setState({ data: snapshot.val() }));
-    this.swipeable = null;
   }
   render() {
     const { params } = this.props.navigation.state;
@@ -92,10 +84,9 @@ export default class WishList extends Component {
                 }
                 leftActionActivationDistance={100}
                 rightActionActivationDistance={100}
-                onRef={ref => (this.swipeable = ref)}
                 onLeftActionRelease={() =>
                   Alert.alert(`Edit ${wish.name}`, "Are you sure?", [
-                    { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                    { text: "Nevermind", style: "cancel" },
                     {
                       text: "Yes, I'm sure",
                       onPress: () =>
@@ -110,7 +101,7 @@ export default class WishList extends Component {
                 }
                 onRightActionRelease={() =>
                   Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
-                    { text: "Nevermind", onPress: () => console.log("no"), style: "cancel" },
+                    { text: "Nevermind", style: "cancel" },
                     { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
                   ])
                 }

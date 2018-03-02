@@ -7,8 +7,8 @@ import { database } from "../config/firebase";
 import firebase from "../config/firebase";
 
 export default class ImageUpload extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       image: null,
     };
@@ -32,23 +32,14 @@ export default class ImageUpload extends Component {
       this.addWishToDb(this.giftName);
     }
   };
-  addNewWish = () => {
-    this.wishRef.on("child_added", snapshot => {
-      console.log(snapshot.val());
-      // this.setState({ data: snapshot.val() });
-    });
-  };
   componentDidMount() {
     this.user = firebase.auth().currentUser;
     this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
   }
-  componentWillUnmount() {
-    this.addNewWish();
-  }
   render() {
     const { params } = this.props.navigation.state;
     this.giftName = params ? params.giftName : null;
-    let { image } = this.state;
+
     return (
       <View style={styles.container}>
         <Button

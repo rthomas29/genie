@@ -31,16 +31,24 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <FormLabel>Email</FormLabel>
-        <FormInput keyboardType="email-address" onChangeText={text => this.setState({ email: text })} />
-        <FormLabel>Password</FormLabel>
-        <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
+        <View style={{ width: 300 }}>
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            keyboardType="email-address"
+            onChangeText={text => this.setState({ email: text })}
+            autoFocus={true}
+          />
+          <FormLabel>Password</FormLabel>
+          <FormInput secureTextEntry={true} onChangeText={text => this.setState({ password: text })} />
+        </View>
         <Button
           rounded
           buttonStyle={{
             borderColor: "#19B5FE",
             backgroundColor: "#3498DB",
+            marginTop: 10,
             marginBottom: 10,
+            width: 250,
           }}
           onPress={() => this.login(this.state.email, this.state.password)}
           title="Login"

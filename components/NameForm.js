@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { Button, FormLabel, FormInput } from "react-native-elements";
-import firebase from "../config/firebase";
 
 export default class NameForm extends Component {
   constructor() {
@@ -13,10 +12,6 @@ export default class NameForm extends Component {
   }
   handleInput = text => {
     this.setState({ giftName: text });
-  };
-  goToImageUpload = nav => {
-    this.props.navigation.navigate("ImageUpload", { getImageUrl: this.getImageUrl, giftName: this.state.giftName });
-    this.setState({ wishLength: this.state.wishLength + 1 });
   };
   render() {
     return (

@@ -30,7 +30,6 @@ export default class Edit extends Component {
     }
   };
   updateWish = async (newName, newUrl, key) => {
-    console.log(key);
     const wish = {
       name: newName,
       imgUrl: newUrl,
