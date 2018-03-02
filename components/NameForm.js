@@ -30,6 +30,7 @@ export default class NameForm extends Component {
           buttonStyle={{
             backgroundColor: "#3498DB",
             marginBottom: 10,
+            marginTop: 10,
           }}
           onPress={() => this.props.navigation.navigate("ImageUpload", { giftName: this.state.giftName })}
           title="Next"
