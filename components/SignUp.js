@@ -19,7 +19,6 @@ export default class SignUp extends Component {
       await firebase.auth().createUserWithEmailAndPassword(email, pass);
       const user = firebase.auth().currentUser;
       this.setState({ user });
-      console.log("Account created");
       this.setState({ email: "", password: "" });
       this.props.navigation.navigate("WishList", { user: this.state.user });
     } catch (error) {

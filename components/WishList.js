@@ -49,7 +49,6 @@ export default class WishList extends Component {
     const { params } = this.props.navigation.state;
     const user = params ? params.user : null;
     const { data } = this.state;
-    const deleteFunc = this.deleteItem;
     const navigate = this.props.navigation.navigate;
 
     return (
@@ -69,7 +68,7 @@ export default class WishList extends Component {
                 key={key}
                 style={styles.listItem}
                 leftContent={
-                  <View style={[styles.leftSwipeItem, { backgroundColor: "rgb(25, 181, 254)", alignSelf: "stretch" }]}>
+                  <View style={styles.leftSwipeItem}>
                     <Text
                       style={{
                         flex: 1,
@@ -79,9 +78,7 @@ export default class WishList extends Component {
                     </Text>
                   </View>
                 }
-                rightContent={
-                  <Text style={[styles.rightSwipeItem, { backgroundColor: "rgb(242, 38, 19)" }]}>Delete</Text>
-                }
+                rightContent={<Text style={styles.rightSwipeItem}>Delete</Text>}
                 leftActionActivationDistance={100}
                 rightActionActivationDistance={100}
                 onLeftActionRelease={() =>
@@ -102,7 +99,7 @@ export default class WishList extends Component {
                 onRightActionRelease={() =>
                   Alert.alert(`Delete ${wish.name}`, "Are you sure?", [
                     { text: "Nope", style: "cancel" },
-                    { text: "Yes, I'm sure", onPress: () => deleteFunc(key) },
+                    { text: "Yes, I'm sure", onPress: () => this.deleteItem(key) },
                   ])
                 }
               >
@@ -194,11 +191,14 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
     paddingRight: 20,
+    backgroundColor: "rgb(25, 181, 254)",
+    alignSelf: "stretch",
   },
   rightSwipeItem: {
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-end",
     paddingLeft: 20,
+    backgroundColor: "rgb(242, 38, 19)",
   },
 });

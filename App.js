@@ -19,7 +19,7 @@ class Landing extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.navigate("WishList", { user: user, nav: this.props.navigation });
+        this.props.navigation.navigate("WishList", { user, nav: this.props.navigation });
       }
     });
   }
