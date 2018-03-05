@@ -17,7 +17,7 @@ export default class WishList extends Component {
           name="menu"
           color="#fff"
           onPress={() => {
-            alert("drawer");
+            navigation.navigate("DrawerOpen");
           }}
         />
       ),

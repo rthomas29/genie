@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Text } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
-import { StackNavigator } from "react-navigation";
+import { StackNavigator, DrawerNavigator } from "react-navigation";
 import firebase from "./config/firebase";
 import WishList from "./components/WishList";
 import NameForm from "./components/NameForm";
@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import WishDetail from "./components/WishDetail";
 import Edit from "./components/Edit";
+import SentLists from "./components/SentLists";
 
 class Landing extends Component {
   static navigationOptions = {
@@ -102,8 +103,17 @@ export const MainStack = StackNavigator(
     },
   },
 );
+
+export const Drawer = DrawerNavigator({
+  Main: {
+    screen: MainStack,
+  },
+  Received: {
+    screen: SentLists,
+  },
+});
 export default class App extends Component {
   render() {
-    return <MainStack />;
+    return <Drawer />;
   }
 }
