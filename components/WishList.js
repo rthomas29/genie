@@ -12,7 +12,15 @@ export default class WishList extends Component {
     const { params } = navigation.state;
     const nav = params ? params.nav : null;
     return {
-      headerLeft: null,
+      headerLeft: (
+        <Icon
+          name="menu"
+          color="#fff"
+          onPress={() => {
+            alert("drawer");
+          }}
+        />
+      ),
       headerTitle: "WishList",
       headerRight: (
         <Icon
