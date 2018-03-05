@@ -48,8 +48,10 @@ export default class WishList extends Component {
   deleteItem = key => {
     this.wishRef.child(key).remove();
   };
-  componentDidMount() {
+  componentWillMount() {
     this.user = firebase.auth().currentUser;
+  }
+  componentDidMount() {
     this.wishRef = firebase.database().ref(`wishes/${this.user.uid}`);
     this.wishRef.on('value', snapshot => this.setState({ data: snapshot.val() }));
   }
@@ -67,7 +69,7 @@ export default class WishList extends Component {
             textAlign: 'center',
           }}
         >
-          Welcome, {user.email}
+          Welcome, {this.user.email}
         </Text>
         <List>
           {map(data, (wish, key) => {

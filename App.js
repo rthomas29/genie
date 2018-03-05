@@ -107,12 +107,29 @@ export const MainStack = StackNavigator(
   },
 );
 
+const ListReceived = StackNavigator(
+  {
+    List: {
+      screen: SentLists,
+    },
+  },
+  {
+    headerMode: 'float',
+    navigationOptions: {
+      headerBackTitle: 'Back',
+      headerStyle: {
+        backgroundColor: '#3498DB',
+      },
+    },
+  },
+);
+
 export const Drawer = DrawerNavigator({
-  Back: {
+  Main: {
     screen: MainStack,
   },
   Received: {
-    screen: SentLists,
+    screen: ListReceived,
   },
 });
 export default class App extends Component {

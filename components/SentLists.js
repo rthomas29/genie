@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Text, List, ListItem } from 'react-native-elements';
+import { List, ListItem, Icon } from 'react-native-elements';
 import { styles } from './WishList';
 
 export default class SentLists extends Component {
   static navigationOptions({ navigation }) {
     return {
-      headerLeft: <Text>Back</Text>,
+      headerLeft: (
+        <Icon name="backspace" color="#fff" onPress={() => navigation.navigate('WishList')} />
+      ),
     };
   }
   constructor() {
