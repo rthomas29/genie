@@ -65,14 +65,6 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const Drawer = DrawerNavigator({
-  Back: {
-    screen: MainStack,
-  },
-  Received: {
-    screen: SentLists,
-  },
-});
 export const MainStack = StackNavigator(
   {
     initialRouteName: Landing,
@@ -103,9 +95,6 @@ export const MainStack = StackNavigator(
     SentLists: {
       screen: SentLists,
     },
-    Drawer: {
-      screen: Drawer,
-    },
   },
   {
     headerMode: 'float',
@@ -118,8 +107,16 @@ export const MainStack = StackNavigator(
   },
 );
 
+export const Drawer = DrawerNavigator({
+  Back: {
+    screen: MainStack,
+  },
+  Received: {
+    screen: SentLists,
+  },
+});
 export default class App extends Component {
   render() {
-    return <MainStack />;
+    return <Drawer />;
   }
 }
