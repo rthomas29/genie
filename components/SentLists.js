@@ -9,6 +9,7 @@ export default class SentLists extends Component {
       headerLeft: (
         <Icon name="backspace" color="#fff" onPress={() => navigation.navigate('WishList')} />
       ),
+      headerTitle: 'Received Lists',
     };
   }
   constructor() {
